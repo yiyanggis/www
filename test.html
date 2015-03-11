@@ -167,6 +167,7 @@ $(document).ready(function(){
 	//(document.getElementById('pac-input'));
   	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
   	var markers = [];
+  	var placeInfowindow = new google.maps.InfoWindow;
 
   	var searchBox = new google.maps.places.SearchBox(
     /** @type {HTMLInputElement} */(input));
@@ -193,15 +194,23 @@ $(document).ready(function(){
         scaledSize: new google.maps.Size(25, 25)
       };
 
+      var point = new google.maps.LatLng(
+              parseFloat(place.geometry.location.k),
+              parseFloat(place.geometry.location.D));
+
       // Create a marker for each place.
       var marker = new google.maps.Marker({
         map: map,
-        icon: image,
+        //icon: image,
         title: place.name,
-        position: place.geometry.location
+        position: point
       });
 
+      var html = "<b>" + place.name + "</b>";
+
       markers.push(marker);
+
+      bindInfoWindow(marker, map, placeInfowindow, html);
 
       bounds.extend(place.geometry.location);
     }
