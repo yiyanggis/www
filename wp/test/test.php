@@ -1,41 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-<title>Title of the document</title>
-</head>
+<?php 
 
-<body>
-The content of the document......
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "password";
-$dbname="test";
+/** Loads the WordPress Environment and Template */
+require( dirname( __FILE__ ) . '/../wp-includes/query.php' );
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+$block1Featured= new WP_Query();
 
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
-
-$sql = "SELECT * from csvtest";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-    // output data of each row
-    while($row = $result->fetch_assoc()) {
-        echo "InvestID: " . $row["InvestID"]. " - Investment: " . $row["Investment"]. "<br>";
-    }
-} else {
-    echo "0 results";
-}
-
-?>
-</body>
-
-</html>
+if ( have_posts() ) : ?>
+	<!-- WordPress has found matching posts -->
+<?php else : ?>
+	<!-- No matching posts, show an error -->
+	<h1>Error 404 &mdash; Page not found.</h1>
+<?php endif; ?>
 
 

@@ -3,25 +3,183 @@
 <head>
 <title>Title of the document</title>
 
+<style>
+	html, body, #map {
+	height: 100%;
+	margin: 0px;
+	padding: 0px
+	}
+
+	.controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        position:absolute;
+        top:0px;
+        left:0px;
+      }
+
+	#pac-input {
+		background-color: #fff;
+		font-family: Roboto;
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 12px;
+		padding: 0 11px 0 13px;
+		text-overflow: ellipsis;
+		width: 400px;
+	}
+</style>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script>
+
+ var customIcons = {
+      restaurant: {
+        icon: 'http://labs.google.com/ridefinder/images/mm_20_blue.png'
+      },
+      bar: {
+        icon: 'http://labs.google.com/ridefinder/images/mm_20_red.png'
+      }
+    };
+
 $(document).ready(function(){
+
+	var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(47.6145, -122.3418),
+        zoom: 13,
+        mapTypeId: 'roadmap',
+	    zoomControl: true,
+	    zoomControlOptions: {
+	        style: google.maps.ZoomControlStyle.LARGE,
+	        position: google.maps.ControlPosition.LEFT_CENTER
+	    },
+	    scaleControl: true,
+	    streetViewControl: true,
+	    streetViewControlOptions: {
+	        position: google.maps.ControlPosition.LEFT_CENTER
+	    },
+	    panControl:true,
+	    panControlOptions: {
+	        position: google.maps.ControlPosition.LEFT_CENTER
+	    }
+      });
+
+	map.setTilt(0);
+    var infoWindow = new google.maps.InfoWindow;
+
 	$.ajax({
 	  url: "testmysql.php",
 	})
   	.done(function( data ) {
-	    alert(data);
+	    //alert(data);
+
+	    var markers=data.getElementsByTagName("marker");
+
+	    for (var i = 0; i < markers.length; i++) {
+          var name = markers[i].getAttribute("name");
+          var address = markers[i].getAttribute("address");
+          var type = markers[i].getAttribute("type");
+          var point = new google.maps.LatLng(
+              parseFloat(markers[i].getAttribute("lat")),
+              parseFloat(markers[i].getAttribute("lng")));
+          var html = "<b>" + name + "</b> <br/>" + address;
+          var icon = customIcons[type] || {};
+          var marker = new google.maps.Marker({
+            map: map,
+            position: point,
+            icon: icon.icon
+          });
+          bindInfoWindow(marker, map, infoWindow, html);
+        }
 	});
+
+
+	//place api
+	
+	var placeInput=$("#pac-input");
+	var searchBox = new google.maps.places.SearchBox(placeInput);
+
+	var markers = [];
+
+  	var placeInfowindow = new google.maps.InfoWindow();
+	var placeMarker = new google.maps.Marker({
+		map: map,
+		anchorPoint: new google.maps.Point(0, -29)
+	});
+
+	// Listen for the event fired when the user selects an item from the
+	// pick list. Retrieve the matching places for that item.
+	google.maps.event.addListener(searchBox, 'places_changed', function() {
+		var places = searchBox.getPlaces();
+
+		if (places.length == 0) {
+		  return;
+		}
+		for (var i = 0, marker; marker = markers[i]; i++) {
+		  marker.setMap(null);
+		}
+
+		// For each place, get the icon, place name, and location.
+		markers = [];
+		var bounds = new google.maps.LatLngBounds();
+		for (var i = 0, place; place = places[i]; i++) {
+		  var image = {
+		    url: place.icon,
+		    size: new google.maps.Size(71, 71),
+		    origin: new google.maps.Point(0, 0),
+		    anchor: new google.maps.Point(17, 34),
+		    scaledSize: new google.maps.Size(25, 25)
+		  };
+
+		  // Create a marker for each place.
+		  var marker = new google.maps.Marker({
+		    map: map,
+		    icon: image,
+		    title: place.name,
+		    position: place.geometry.location
+		  });
+
+		  markers.push(marker);
+
+		  bounds.extend(place.geometry.location);
+		}
+
+		map.fitBounds(bounds);
+	});
+
+	// Bias the SearchBox results towards places that are within the bounds of the
+	// current map's viewport.
+	google.maps.event.addListener(map, 'bounds_changed', function() {
+		var bounds = map.getBounds();
+		searchBox.setBounds(bounds);
+	});
+	
  });
+
+function bindInfoWindow(marker, map, infoWindow, html) {
+      google.maps.event.addListener(marker, 'click', function() {
+        infoWindow.setContent(html);
+        infoWindow.open(map, marker);
+      });
+    }
 
 </script>
 
 </head>
 
 <body>
-The content of the document......
-
+	
+	<div id="map"></div>
+	<input id="pac-input" class="controls" type="text" placeholder="Enter a location">
 </body>
 
 </html>
