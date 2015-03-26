@@ -28,7 +28,7 @@ if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
 
 $tmpName = $_FILES['image']['tmp_name'];
 
-//move_uploaded_file($tmpName,"test.jpg");
+move_uploaded_file($tmpName,"test.jpg");
 
 
 // Read the file
