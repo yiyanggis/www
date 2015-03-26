@@ -28,18 +28,12 @@ if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
 
 $tmpName = $_FILES['image']['tmp_name'];
 
-//move_uploaded_file($tmpName,"test.jpg");
+move_uploaded_file($tmpName,"test.jpg");
 
+//file path
 
-// Read the file
+//parse date
 
-$fp = fopen($tmpName, 'r');
-
-$data = fread($fp, filesize($tmpName));
-
-$data = addslashes($data);
-
-fclose($fp);
 
 $lat=floatval($_POST["lat"]);
 $lon=floatval($_POST["lon"]);

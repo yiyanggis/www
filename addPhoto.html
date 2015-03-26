@@ -53,10 +53,22 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
+<script type="text/javascript" src="/js/moment.js"></script>
+
 <script>
 
-$(document).ready(function(){
+var date;
 
+$(document).ready(function(){
+	$('#imageinput').change(function(){ 
+
+		console.log(this.files.length);
+		date=new Date(this.files[0].lastModifiedDate);
+
+		//ajax post to php
+
+		//display result
+	});
 });
 
 </script>
@@ -74,7 +86,7 @@ $(document).ready(function(){
 
 		<div class="input-group">
 		  	<span class="input-group-addon" id="basic-addon1">Image</span>
-		  	<input name="image" accept="image/jpeg" type="file" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+		  	<input id="imageinput" name="image" accept="image/jpeg" type="file" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
 		</div>
 
 		<div class="input-group">
@@ -92,6 +104,18 @@ $(document).ready(function(){
 		  	<span class="input-group-addon">Description</span>
 		  	<input type="text" name="desc" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
 		</div>
+
+		<!--<div class='input-group date' id='datetimepicker1'>
+			<input type='text' name='date' class="form-control" />
+			<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+			</span>
+		</div>
+
+		<script type="text/javascript">
+		$(function () {
+			$('#datetimepicker1').datetimepicker();
+		});
+		</script>-->
 
 		<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
 		<div>
