@@ -58,16 +58,60 @@
 <script>
 
 var date;
+var data={};
+var data2=new FormData();
 
 $(document).ready(function(){
 	$('#imageinput').change(function(){ 
 
-		console.log(this.files.length);
+		//console.log(this.files.length);
+
+		$.each(this.files, function(key, value)
+	    {
+	        data2.append(key, value);
+	    });
+
 		date=new Date(this.files[0].lastModifiedDate);
 
+		var dateStr=date.toGMTString();
+
+		data.dateStr=dateStr;
+
+		
+
+	
+	  	
+		//display result
+	});
+
+	$('#submitBtn').click(function(){
 		//ajax post to php
 
-		//display result
+		data.lat=$('#latInput').val();
+		data.lon=$('#lonInput').val();
+		data.desc=$('#descInput').val();
+
+		$.ajax({
+			type:"POST",
+		  	url: "insertmysql2.php",
+		  	dataType: "json",
+		  	data: data,
+		  	success:function(d){
+		  		console.log(d);
+		  	}
+		});
+
+		$.ajax({
+			type:"POST",
+		  	url: "insertmysql3.php",
+		  	dataType: "json",
+		  	data: data2,
+		  	processData: false, // Don't process the files
+        	contentType: false,
+		  	success:function(d){
+		  		console.log(d);
+		  	}
+		});
 	});
 });
 
@@ -76,9 +120,12 @@ $(document).ready(function(){
 </head>
 
 <body>
+
+	<button id="submitBtn" class="btn btn-primary">Submit</button>
+
 	
 	<div style="width:400px">
-	<form enctype="multipart/form-data" action="insertmysql.php" method="post" name="changer">
+	<form name="changer">
 
 		<!--<input name="MAX_FILE_SIZE" value="102400" type="hidden">
 		<input name="image" accept="image/jpeg" type="file">
@@ -91,18 +138,18 @@ $(document).ready(function(){
 
 		<div class="input-group">
 			<span class="input-group-addon" id="basic-addon2">Latitude</span>
-		  	<input type="text" name="lat" class="form-control" placeholder="latitude" aria-describedby="basic-addon2">
+		  	<input type="text" id="latInput" name="lat" class="form-control" placeholder="latitude" aria-describedby="basic-addon2">
 		  
 		</div>
 
 		<div class="input-group">
 		  	<span class="input-group-addon">Longitude</span>
-		  	<input type="text" name="lon" class="form-control" placeholder="longitude" aria-describedby="basic-addon2">
+		  	<input type="text" id="lonInput" name="lon" class="form-control" placeholder="longitude" aria-describedby="basic-addon2">
 		</div>
 
 		<div class="input-group">
 		  	<span class="input-group-addon">Description</span>
-		  	<input type="text" name="desc" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
+		  	<input type="text" id="descInput" name="desc" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
 		</div>
 
 		<!--<div class='input-group date' id='datetimepicker1'>
@@ -119,7 +166,7 @@ $(document).ready(function(){
 
 		<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
 		<div>
-			<button value="Submit" type="submit" class="btn btn-primary">Submit</button>
+			<button id="submitBtn2" class="btn btn-primary">Submit</button>
 		</div>
 
 	<form>

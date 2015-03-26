@@ -10,6 +10,10 @@ $dbname="test";
 //$node = $dom->createElement("markers");
 //$parnode = $dom->appendChild($node);
 
+header("content-type:application/json");
+
+var_dump($_POST);
+
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -21,14 +25,15 @@ if ($conn->connect_error) {
 
 // selected and uploaded a file
 
-if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
+//if (isset($_FILES['image']) && $_FILES['image']['size'] > 0) {
 
 
 // Temporary file name stored on the server
 
-$tmpName = $_FILES['image']['tmp_name'];
+//$tmpName = $_FILES['image']['tmp_name'];
 
-move_uploaded_file($tmpName,"test.jpg");
+//move_uploaded_file($tmpName,"test.jpg");
+
 
 //file path
 
@@ -39,8 +44,7 @@ $lat=floatval($_POST["lat"]);
 $lon=floatval($_POST["lon"]);
 $desc=$_POST["desc"];
 
-var_dump($_POST);
-var_dump($lat);
+//var_dump($lat);
 
 
 // Create the query and insert
@@ -51,26 +55,24 @@ $query = "INSERT INTO phototable ";
 
 //$query .= "(image,lat,lon,desc) VALUES ('$data',$lat,$lon,'$desc')";
 
-$query .= "(image,lat,lon,`desc`) VALUES ('$data',$lat,$lon,'$desc')";
+$query .= "(lat,lon,`desc`) VALUES ($lat,$lon,'$desc')";
 
-var_dump($query);
+//var_dump($query);
 
 $result = $conn->query($query);
 
 
 // Print results
-var_dump($result);
+//var_dump($result);
 
-print "Thank you, your file has been uploaded.";
+echo json_encode("Thank you, your file has been uploaded.");
 
 
-}
+//else {
 
-else {
+//print "No image selected/uploaded";
 
-print "No image selected/uploaded";
-
-}
+//}
 
 
 // Close our MySQL Link
