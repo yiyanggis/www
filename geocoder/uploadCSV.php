@@ -21,15 +21,22 @@ $datetime=new DateTime($date);
 
 $path='csv/test'.$datetime->format('Y').$datetime->format('m').$datetime->format('d').$datetime->format('H').$datetime->format('i').$datetime->format('s').'.csv';
 
+$result=array("path"=>$path);
+
 foreach($_FILES as $file)
     {
     	//echo $file['tmp_name'];
 
-        move_uploaded_file($file['tmp_name'], $path);
+        if(move_uploaded_file($file['tmp_name'], $path))
+        {
+			$result['success']=true;
+        }
+        else{
+        	$result['success']=false;
+        }
 
     }
 
-$result=array("path"=>$path);
 echo json_encode($result)
 
 //move_uploaded_file($tmpName,"test.jpg");
