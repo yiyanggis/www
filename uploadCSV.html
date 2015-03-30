@@ -186,6 +186,13 @@ $(document).ready(function(){
 
 	$('#uploadBtn').click(function(){
 		//ajax post to php
+		var fileExt=this.files[0].name.split('.');
+		fileExt=fileExt[fileExt.length];
+
+		if(fileExt!='csv'){
+			alert("only csv file is allowwed");
+			return;
+		}
 
 		$.ajax({
 			type:"POST",
