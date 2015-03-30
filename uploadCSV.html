@@ -77,6 +77,7 @@ $(document).ready(function(){
 		$.each(this.files, function(key, value)
 	    {
 	        data2.append(key, value);
+
 	    });
 
 		filename=this.files[0].name;
@@ -190,7 +191,7 @@ $(document).ready(function(){
 	$('#uploadBtn').click(function(){
 		//ajax post to php
 		var fileExt=filename.split('.');
-		fileExt=fileExt[fileExt.length-1];
+		fileExt=fileExt[fileExt.length];
 
 		if(fileExt!='csv'){
 			alert("only csv file is allowwed");
