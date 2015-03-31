@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Title of the document</title>
+
+<style>
+	html, body {
+	height: 100%;
+	/*margin: 0px;
+	padding: 0px*/
+	}
+
+	#map{
+		width:400px;
+		height:300px;
+	}
+
+	.controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        position:absolute;
+        top:0px;
+        left:0px;
+      }
+
+	#pac-input {
+		background-color: #fff;
+		font-family: Roboto;
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 12px;
+		padding: 0 11px 0 13px;
+		text-overflow: ellipsis;
+		width: 400px;
+	}
+
+	.input-group{
+		margin: 5px;
+	}
+</style>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/moment.js"></script>
+
+<script>
+
+var date;
+var data={};
+var data2={};
+
+$(document).ready(function(){
+
+
+	var map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(28.6145, -81.5418),
+        zoom: 10,
+        mapTypeId: 'roadmap',
+	    zoomControl: true,
+	    zoomControlOptions: {
+	        style: google.maps.ZoomControlStyle.LARGE,
+	        position: google.maps.ControlPosition.LEFT_CENTER
+	    },
+	    scaleControl: true,
+	    streetViewControl: true,
+	    streetViewControlOptions: {
+	        position: google.maps.ControlPosition.LEFT_CENTER
+	    },
+	    panControl:true,
+	    panControlOptions: {
+	        position: google.maps.ControlPosition.LEFT_CENTER
+	    }
+      });
+
+	var marker;
+
+	map.setTilt(0);
+
+	google.maps.event.addListener(map, 'click', function(event) {
+		if(marker!=null){
+			marker.setMap(null);
+			marker=null;
+		}
+
+
+		$('#latInput').val(event.latLng.k);
+		$('#lonInput').val(event.latLng.D);
+
+		marker = new google.maps.Marker({
+			position: event.latLng,
+			map: map,
+			title: 'location'
+			});
+	});
+
+
+
+	$('#imageinput').change(function(){ 
+
+		//console.log(this.files.length);
+		data2=new FormData();
+
+		$.each(this.files, function(key, value)
+	    {
+	        data2.append(key, value);
+	    });
+
+		date=new Date(this.files[0].lastModifiedDate);
+
+		var dateStr=date.toGMTString();
+
+		data.dateStr=dateStr;
+
+		
+
+	
+	  	
+		//display result
+	});
+
+	$('#submitBtn').click(function(){
+		//ajax post to php
+
+		data.lat=$('#latInput').val();
+		data.lon=$('#lonInput').val();
+		data.desc=$('#descInput').val();
+
+		if(data.lat==undefined||data.lon==undefined||data.desc==undefined){
+			alert("please fill all the blanks");
+			return;
+		}
+
+		if(data.lat==""||data.lon==""||data.desc==""){
+			alert("please fill all the blanks");
+			return;
+		}
+		
+
+		$.ajax({
+			type:"POST",
+		  	url: "insertmysql3.php",
+		  	dataType: "json",
+		  	data: data2,
+		  	processData: false, // Don't process the files
+        	contentType: false,
+		  	success:function(d){
+		  		if(d.success){
+		  			console.log(d);
+
+		  		data.path=d.path;
+
+		  		$.ajax({
+					type:"POST",
+				  	url: "insertmysql2.php",
+				  	dataType: "json",
+				  	data: data,
+				  	success:function(dd){
+				  		console.log(dd);
+				  	}
+				});
+		  		}
+		  		else{
+		  			alert("upload failed");
+		  		}
+
+		  		data2={};
+		  		data={};
+		  		
+		  	}
+		});
+	});
+});
+
+</script>
+
+</head>
+
+<body>
+
+	
+
+	<div class="row"  style="width:800px">
+	  <div class="col-md-6">
+	  	<div>
+
+				<!--<input name="MAX_FILE_SIZE" value="102400" type="hidden">
+				<input name="image" accept="image/jpeg" type="file">
+				<input value="Submit" type="submit">-->
+
+				<div class="input-group">
+				  	<span class="input-group-addon" id="basic-addon1">Image</span>
+				  	<input id="imageinput" name="image" accept="image/jpeg" type="file" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+				</div>
+
+				<div class="input-group">
+					<span class="input-group-addon" id="basic-addon2">Latitude</span>
+				  	<input type="text" id="latInput" name="lat" class="form-control" placeholder="click the map to get lat" aria-describedby="basic-addon2">
+				  
+				</div>
+
+				<div class="input-group">
+				  	<span class="input-group-addon">Longitude</span>
+				  	<input type="text" id="lonInput" name="lon" class="form-control" placeholder="click the map to get lon" aria-describedby="basic-addon2">
+				</div>
+
+				<div class="input-group">
+				  	<span class="input-group-addon">Description</span>
+				  	<input type="text" id="descInput" name="desc" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
+				</div>
+
+				<!--<div class='input-group date' id='datetimepicker1'>
+					<input type='text' name='date' class="form-control" />
+					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+
+				<script type="text/javascript">
+				$(function () {
+					$('#datetimepicker1').datetimepicker();
+				});
+				</script>-->
+
+				<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+				<!--<div>
+					<button id="submitBtn2" class="btn btn-primary">Submit</button>
+				</div>-->
+
+		</div>
+		<div>
+			<button id="submitBtn" class="btn btn-primary">upload</button>
+		</div>
+		
+	  </div>
+	  <div class="col-md-6">
+	  	<div id="map">
+	  	</div>
+	  </div>
+	</div>
+	
+</body>
+
+</html>
+
+
