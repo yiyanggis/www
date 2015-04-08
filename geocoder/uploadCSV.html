@@ -67,6 +67,8 @@ var keys=[];
 
 var csvData;
 
+var filepath;
+
 var filename;
 
 $(document).ready(function(){
@@ -211,6 +213,7 @@ $(document).ready(function(){
 		  		d3.csv(d.path, function(csv) {
 		  			console.log(csv);
 		  			csvData=csv;
+		  			filepath=d.path;
 		  			keys=Object.keys(csv[0]);
 	            	//csv.forEach(function(row) {
 	                //console.log(Object.keys(row));
