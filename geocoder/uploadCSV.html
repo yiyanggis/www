@@ -38,6 +38,11 @@
 	.input-group{
 		margin: 5px;
 	}
+
+	.dropover{
+		background:cyan;
+	}
+
 </style>
 
 <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
@@ -72,6 +77,49 @@ var filepath;
 var filename;
 
 $(document).ready(function(){
+
+	//dnd
+	var dropZone=$("#dropZone");
+
+	// Optional.   Show the copy icon when dragging over.  Seems to only work for chrome.
+    dropZone.on('dragover', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).addClass('dropover');
+        //e.dataTransfer.dropEffect = 'copy';
+    });
+
+    dropZone.on('dragleave', function(e) {
+        $(this).removeClass('dropover');
+    });
+
+    // Get file data on drop
+    dropZone.on('drop', function(e) {
+
+    	$(this).removeClass('dropover');
+
+        e.stopPropagation();
+        e.preventDefault();
+        var files = e.originalEvent.dataTransfer.files; // Array of all files
+        $('#csvinput').files=e.originalEvent.dataTransfer.files;
+
+        //$('#csvinput').val(files[0].name);
+        $('#uploadFileName').text("File chosen: "+files[0].name);
+
+        $.each(files, function(key, value)
+	    {
+	        data2.append(key, value);
+	    });
+
+		filename=files[0].name;
+		date=new Date(files[0].lastModifiedDate);
+
+		var dateStr=date.toGMTString();
+
+		data.dateStr=dateStr;
+    });
+
+
 	$('#csvinput').change(function(){ 
 
 		//console.log(this.files.length);
@@ -82,6 +130,9 @@ $(document).ready(function(){
 	    });
 
 		filename=this.files[0].name;
+
+		$('#uploadFileName').text("File chosen: "+filename);
+
 		date=new Date(this.files[0].lastModifiedDate);
 
 		var dateStr=date.toGMTString();
@@ -96,7 +147,7 @@ $(document).ready(function(){
 	});
 
 	$('#addrSelect').change(function(){
-		$("#submitBtn2").removeAttr('disabled');
+		//$("#submitBtn2").removeAttr('disabled');
 	});
 
 	$('#submitBtn2').click(function(){
@@ -105,6 +156,7 @@ $(document).ready(function(){
 		var total=csvData.length;
 		var current=0;
 		var rate=0;
+		$("#progressbar").attr("style","width:0%");
 		if(csvData!==undefined){
 			$.each(csvData,function(index,value){
 				current=index+1;
@@ -120,6 +172,7 @@ $(document).ready(function(){
                   value.Y=d.results[0].geometry.location.lat;
                   rate=current*100.0/total;
                   $("#progressbar").attr("style","width:"+rate+"%");
+                  $("#progressbarText").text(current+"/"+total);
                 }
 
 
@@ -235,6 +288,8 @@ $(document).ready(function(){
         		});
 		  	}
 		});
+
+		$("#submitBtn2").removeAttr('disabled');
 	});
 
 });
@@ -248,7 +303,7 @@ $(document).ready(function(){
 	
 
 	
-	<div style="width:400px">
+	<div style="width:400px;margin-left: auto; margin-right: auto;" id="dropZone">
 		<!--<form name="form-inline">-->
 
 			<!--<input name="MAX_FILE_SIZE" value="102400" type="hidden">
@@ -258,6 +313,9 @@ $(document).ready(function(){
 				<div class="input-group">
 				  	<span class="input-group-addon" id="basic-addon1">File</span>
 				  	<input id="csvinput" name="csv" accept=".csv" type="file" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+				</div>
+				<div id="uploadFileDiv">
+					<span id="uploadFileName"></span>
 				</div>
 				<button id="uploadBtn" class="btn btn-primary">upload</button>
 			</div>
@@ -307,7 +365,7 @@ $(document).ready(function(){
 
 		<div class="progress">
 		  <div class="progress-bar" id="progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
-		    <span class="sr-only" id="progressbarText"></span>
+		    <span  id="progressbarText"></span><!--class="sr-only"-->
 		  </div>
 		</div>
 	</div>
