@@ -3,6 +3,8 @@
 <head>
 <title>Title of the document</title>
 
+<link href="../js/jqueryUI/jquery-ui.css" rel="stylesheet">
+
 <style>
 	html, body, #map {
 	height: 100%;
@@ -20,8 +22,7 @@
         outline: none;
         box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         position:absolute;
-        top:0px;
-        left:0px;
+        
       }
 
 	#pac-input {
@@ -33,6 +34,39 @@
 		padding: 0 11px 0 13px;
 		text-overflow: ellipsis;
 		width: 400px;
+
+		top:0px;
+        left:0px;
+	}
+
+	#panel {
+		background-color: #fff;
+		font-family: Roboto;
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 12px;
+		padding: 0 11px 0 13px;
+		text-overflow: ellipsis;
+		width: 400px;
+		height:300px;
+
+		top:0px;
+		right:0px;
+	}
+
+	#panel2 {
+		background-color: #fff;
+		font-family: Roboto;
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 12px;
+		padding: 0 11px 0 13px;
+		text-overflow: ellipsis;
+		width: 400px;
+		height:300px;
+
+		top:0px;
+		right:0px;
 	}
 
 	.markerImg{
@@ -46,6 +80,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script src="js/markerclusterer.js"></script>
+<script src="../js/jqueryUI/jquery-ui.js"></script>
 
 <script>
 
@@ -85,6 +120,30 @@ $(document).ready(function(){
 
 	map.setTilt(0);
     var infoWindow = new google.maps.InfoWindow;
+
+    //street viewer
+    google.maps.event.addListener(map, 'click', function(e) {
+	    //map.setZoom(8);
+	    //map.setCenter(marker.getPosition());
+	 //    var marker = new google.maps.Marker({
+		//     position: e.latLng,
+		//     map: map,
+		//     title: 'Click to zoom'
+		// });
+
+		//marker.
+
+		var panoramaOptions = {
+		  position: e.latLng,
+		  pov: {
+		    heading: 34,
+		    pitch: 10
+		  }
+		};
+
+		var panorama = new  google.maps.StreetViewPanorama(document.getElementById("panel2"), panoramaOptions);
+		map.setStreetView(panorama);
+	});
 
     //zip code
     /*var overlay_options = {
@@ -263,7 +322,28 @@ $(document).ready(function(){
     var bounds = map.getBounds();
     searchBox.setBounds(bounds);
   });
-	
+
+  	$( "#dialog" ).dialog({
+		autoOpen: false,
+		width: 400
+		// ,buttons: [
+		// 	{
+		// 		text: "Ok",
+		// 		click: function() {
+		// 			$( this ).dialog( "close" );
+		// 		}
+		// 	},
+		// 	{
+		// 		text: "Cancel",
+		// 		click: function() {
+		// 			$( this ).dialog( "close" );
+		// 		}
+		// 	}
+		// ]
+	});
+
+	$( "#dialog" ).dialog( "open" );
+		
  });
 
 function bindInfoWindow(marker, map, infoWindow, html) {
@@ -281,6 +361,16 @@ function bindInfoWindow(marker, map, infoWindow, html) {
 	
 	<div id="map"></div>
 	<input id="pac-input" class="controls" type="text" placeholder="Enter a location">
+	<!--<div id="panel" class="controls">
+
+	</div>-->
+
+	<div id="dialog" title="Dialog Title">
+		<div id="panel2">
+
+	</div>
+	</div>
+
 </body>
 
 </html>
