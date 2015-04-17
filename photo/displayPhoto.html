@@ -4,75 +4,10 @@
 <title>Title of the document</title>
 
 <link href="../js/jqueryUI/jquery-ui.css" rel="stylesheet">
-
+<link href="css/displayPhoto.css" rel="stylesheet">
+<link href="../css/bootstrap.css" rel="stylesheet">
 <style>
-	html, body, #map {
-	height: 100%;
-	margin: 0px;
-	padding: 0px
-	}
-
-	.controls {
-        margin-top: 16px;
-        border: 1px solid transparent;
-        border-radius: 2px 0 0 2px;
-        box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        height: 32px;
-        outline: none;
-        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-        position:absolute;
-        
-      }
-
-	#pac-input {
-		background-color: #fff;
-		font-family: Roboto;
-		font-size: 15px;
-		font-weight: 300;
-		margin-left: 12px;
-		padding: 0 11px 0 13px;
-		text-overflow: ellipsis;
-		width: 400px;
-
-		top:0px;
-        left:0px;
-	}
-
-	#panel {
-		background-color: #fff;
-		font-family: Roboto;
-		font-size: 15px;
-		font-weight: 300;
-		margin-left: 12px;
-		padding: 0 11px 0 13px;
-		text-overflow: ellipsis;
-		width: 400px;
-		height:300px;
-
-		top:0px;
-		right:0px;
-	}
-
-	#panel2 {
-		background-color: #fff;
-		font-family: Roboto;
-		font-size: 15px;
-		font-weight: 300;
-		margin-left: 12px;
-		padding: 0 11px 0 13px;
-		text-overflow: ellipsis;
-		width: 400px;
-		height:300px;
-
-		top:0px;
-		right:0px;
-	}
-
-	.markerImg{
-		width:400px;
-		height:300px;
-	}
+	
 </style>
 
 <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
@@ -80,6 +15,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
 <script src="js/markerclusterer.js"></script>
+
+<script src="js/imageFunctions.js"></script>
+
+<script src="js/displayPhoto.js"></script>
+<script src="../js/bootstrap.js"></script>
 <script src="../js/jqueryUI/jquery-ui.js"></script>
 
 <script>
@@ -93,258 +33,14 @@
       }
     };
 
+//var flagIcon={icon:'https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Flag--Right-Azure.png'};
+var flagIcon={icon:'resources/flag.png'};
+
 
 var photoMarkers=[];
 
-$(document).ready(function(){
+var photoImages=[];
 
-	var map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(28.6145, -81.5418),
-        zoom: 10,
-        mapTypeId: 'roadmap',
-	    zoomControl: true,
-	    zoomControlOptions: {
-	        style: google.maps.ZoomControlStyle.LARGE,
-	        position: google.maps.ControlPosition.LEFT_CENTER
-	    },
-	    scaleControl: true,
-	    streetViewControl: true,
-	    streetViewControlOptions: {
-	        position: google.maps.ControlPosition.LEFT_CENTER
-	    },
-	    panControl:true,
-	    panControlOptions: {
-	        position: google.maps.ControlPosition.LEFT_CENTER
-	    }
-      });
-
-	map.setTilt(0);
-    var infoWindow = new google.maps.InfoWindow;
-
-    //street viewer
-    google.maps.event.addListener(map, 'click', function(e) {
-	    //map.setZoom(8);
-	    //map.setCenter(marker.getPosition());
-	 //    var marker = new google.maps.Marker({
-		//     position: e.latLng,
-		//     map: map,
-		//     title: 'Click to zoom'
-		// });
-
-		//marker.
-
-		var panoramaOptions = {
-		  position: e.latLng,
-		  pov: {
-		    heading: 34,
-		    pitch: 10
-		  }
-		};
-
-		var panorama = new  google.maps.StreetViewPanorama(document.getElementById("panel2"), panoramaOptions);
-		map.setStreetView(panorama);
-	});
-
-    //zip code
-    /*var overlay_options = {
-		getTileUrl : function(coord, zoom) {
-			//return 'http://mt0.google.com/vt/lyrs=m@169010401,highlight:0x8628cfb25938b6c7:0x25bb73aa81b98232@1%7Cstyle:maps,highlight:0x8629196e6ca28391:0x40f089ab362d3930@1%7Cstyle:maps&hl=en&x=' + coord.x + '&y=' + coord.y + '&z=' + zoom + '&s=G'
-			//if (highlight != null && highlight.length > 0) {
-			//	return 'http://www.unitedstateszipcodes.org.s3-website-us-east-1.amazonaws.com/tiles/' + highlight + '/' + coord.x + '-' + coord.y + '-' + zoom + '.png';
-			//} else {
-				return 'http://www.unitedstateszipcodes.org.s3-website-us-east-1.amazonaws.com/tiles/all/' + coord.x + '-' + coord.y + '-' + zoom + '.png';
-			//}
-		},
-		tileSize : new google.maps.Size(256, 256),
-		// opacity: 0.3,
-		isPng : true
-	};*/
-
-	//var overlay = new google.maps.ImageMapType(overlay_options);
-	//map.overlayMapTypes.insertAt(0, overlay);
-
-
-
-	$.ajax({
-	  url: "testPhoto.php",
-	})
-  	.done(function( data ) {
-
-  		var markers=JSON.parse(data);
-
-  		photoMarkers=[];
-
-  		$.each(markers,function(index,value){
-
-  			var point = new google.maps.LatLng(
-              parseFloat(value.lat),
-              parseFloat(value.lon)
-            );
-
-  			var html = "<img class='markerImg' src='"+value.path+"'>";
-
-  			var marker = new google.maps.Marker({
-		        map: map,
-		        //icon: image,
-		        title: value.desc,
-		        position: point
-		      });
-
-  			photoMarkers.push(marker);
-
-  			bindInfoWindow(marker, map, infoWindow, html);
-  		});
-
-  		var markerCluster = new MarkerClusterer(map, photoMarkers);
-
-	});
-
-
-	//place api
-	
-	/*var placeInput=$("#pac-input");
-	var searchBox = new google.maps.places.SearchBox(placeInput);
-
-	
-
-  	var placeInfowindow = new google.maps.InfoWindow();
-	var placeMarker = new google.maps.Marker({
-		map: map,
-		anchorPoint: new google.maps.Point(0, -29)
-	});
-
-	// Listen for the event fired when the user selects an item from the
-	// pick list. Retrieve the matching places for that item.
-	google.maps.event.addListener(searchBox, 'places_changed', function() {
-		var places = searchBox.getPlaces();
-
-		if (places.length == 0) {
-		  return;
-		}
-		for (var i = 0, marker; marker = markers[i]; i++) {
-		  marker.setMap(null);
-		}
-
-		// For each place, get the icon, place name, and location.
-		markers = [];
-		var bounds = new google.maps.LatLngBounds();
-		for (var i = 0, place; place = places[i]; i++) {
-		  var image = {
-		    url: place.icon,
-		    size: new google.maps.Size(71, 71),
-		    origin: new google.maps.Point(0, 0),
-		    anchor: new google.maps.Point(17, 34),
-		    scaledSize: new google.maps.Size(25, 25)
-		  };
-
-		  // Create a marker for each place.
-		  var marker = new google.maps.Marker({
-		    map: map,
-		    icon: image,
-		    title: place.name,
-		    position: place.geometry.location
-		  });
-
-		  markers.push(marker);
-
-		  bounds.extend(place.geometry.location);
-		}
-
-		map.fitBounds(bounds);
-	});
-
-	// Bias the SearchBox results towards places that are within the bounds of the
-	// current map's viewport.
-	google.maps.event.addListener(map, 'bounds_changed', function() {
-		var bounds = map.getBounds();
-		searchBox.setBounds(bounds);
-	});*/
-
-	var input = $("#pac-input")[0];
-	//(document.getElementById('pac-input'));
-  	map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-  	var markers = [];
-  	var placeInfowindow = new google.maps.InfoWindow;
-
-  	var searchBox = new google.maps.places.SearchBox(
-    /** @type {HTMLInputElement} */(input));
-
-	google.maps.event.addListener(searchBox, 'places_changed', function() {
-    var places = searchBox.getPlaces();
-
-    if (places.length == 0) {
-      return;
-    }
-    for (var i = 0, marker; marker = markers[i]; i++) {
-      marker.setMap(null);
-    }
-
-    // For each place, get the icon, place name, and location.
-    markers = [];
-    var bounds = new google.maps.LatLngBounds();
-    for (var i = 0, place; place = places[i]; i++) {
-      var image = {
-        url: place.icon,
-        size: new google.maps.Size(71, 71),
-        origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(17, 34),
-        scaledSize: new google.maps.Size(25, 25)
-      };
-
-      var point = new google.maps.LatLng(
-              parseFloat(place.geometry.location.k),
-              parseFloat(place.geometry.location.D));
-
-      // Create a marker for each place.
-      var marker = new google.maps.Marker({
-        map: map,
-        //icon: image,
-        title: place.name,
-        position: point
-      });
-
-      var html = "<b>" + place.name + "</b>";
-
-      markers.push(marker);
-
-      bindInfoWindow(marker, map, placeInfowindow, html);
-
-      bounds.extend(place.geometry.location);
-    }
-
-    map.fitBounds(bounds);
-  });
-  // [END region_getplaces]
-
-  // Bias the SearchBox results towards places that are within the bounds of the
-  // current map's viewport.
-  google.maps.event.addListener(map, 'bounds_changed', function() {
-    var bounds = map.getBounds();
-    searchBox.setBounds(bounds);
-  });
-
-  	$( "#dialog" ).dialog({
-		autoOpen: false,
-		width: 400
-		// ,buttons: [
-		// 	{
-		// 		text: "Ok",
-		// 		click: function() {
-		// 			$( this ).dialog( "close" );
-		// 		}
-		// 	},
-		// 	{
-		// 		text: "Cancel",
-		// 		click: function() {
-		// 			$( this ).dialog( "close" );
-		// 		}
-		// 	}
-		// ]
-	});
-
-	$( "#dialog" ).dialog( "open" );
-		
- });
 
 function bindInfoWindow(marker, map, infoWindow, html) {
       google.maps.event.addListener(marker, 'click', function() {
@@ -358,12 +54,42 @@ function bindInfoWindow(marker, map, infoWindow, html) {
 </head>
 
 <body>
-	
+	<div  class="palette">
+		<div role="tabpanel">
+
+		  <!-- Nav tabs -->
+		  <ul class="nav nav-tabs" role="tablist">
+		    <li role="presentation" class="active"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">images</a></li>
+		    <li role="presentation"><a href="#layers" aria-controls="layers" role="tab" data-toggle="tab">layers</a></li>
+		  </ul>
+
+		  <!-- Tab panes -->
+		  <div class="tab-content">
+		    <div role="tabpanel" class="tab-pane active" id="images">
+		    	<ul id="imageList" class="list-group">
+		    		<!--
+				  <li class="list-group-item list-group-item-success">Dapibus ac facilisis in</li>
+				  <li class="list-group-item list-group-item-info">Cras sit amet nibh libero</li>
+				  <li class="list-group-item list-group-item-warning">Porta ac consectetur ac</li>
+				  <li class="list-group-item list-group-item-danger">Vestibulum at eros</li>
+				-->
+				</ul>
+		    </div>
+		    <div role="tabpanel" class="tab-pane" id="layers">
+
+		    </div>
+
+		  </div>
+
+		</div>
+	</div>
+
 	<div id="map"></div>
 	<input id="pac-input" class="controls" type="text" placeholder="Enter a location">
 	<!--<div id="panel" class="controls">
 
 	</div>-->
+
 
 	<div id="dialog" title="Dialog Title">
 		<div id="panel2">
