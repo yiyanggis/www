@@ -43,6 +43,9 @@ $path=$_POST["path"];
 $lat=floatval($_POST["lat"]);
 $lon=floatval($_POST["lon"]);
 $desc=$_POST["desc"];
+$addr=$_POST["addr"];
+
+
 
 //var_dump($lat);
 
@@ -55,7 +58,7 @@ $query = "INSERT INTO phototable ";
 
 //$query .= "(image,lat,lon,desc) VALUES ('$data',$lat,$lon,'$desc')";
 
-$query .= "(path, lat,lon,`desc`) VALUES ('$path',$lat,$lon,'$desc')";
+$query .= "(path, lat,lon,`desc`, `addr`) VALUES ('$path',$lat,$lon,'$desc', '$addr')";
 
 //var_dump($query);
 

@@ -159,12 +159,16 @@ $(document).ready(function(){
 		$("#progressbar").attr("style","width:0%");
 		if(csvData!==undefined){
 			$.each(csvData,function(index,value){
-				current=index+1;
+
+				//current=index+1;
 				console.log(index+","+value[addressField]);
               $.ajax({
                 url:"https://maps.googleapis.com/maps/api/geocode/json?address="+value[addressField]+"&sensor=false&key=AIzaSyCp1HWib0Es6rZGsfylHOZMawOiOZYx3Q4",
                 async:false
               }).done(function(d){
+
+              	current+=1;
+
                 if(d.status=="OK")//ZERO_RESULTS
                 {
                   console.log(d);

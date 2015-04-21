@@ -69,11 +69,11 @@ var data2={};
 $(document).ready(function(){
 
 
-	data.path="pathvalue";
+	data.url="pathvalue";
 
 	$.ajax({
 		type:"POST",
-	  	url: "test.php",
+	  	url: "../geocoder/geocoder.php",
 	  	dataType: "json",
 	  	data: data,
 	  	success:function(d){

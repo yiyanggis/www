@@ -24,3 +24,4 @@ FlagImage.prototype.focusOn=function(){
 	
 
 }
+

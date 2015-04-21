@@ -66,8 +66,11 @@ var date;
 var data={};
 var data2={};
 
+var geocoder
+
 $(document).ready(function(){
 
+	geocoder = new google.maps.Geocoder();
 
 	var map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(28.6145, -81.5418),
@@ -108,6 +111,23 @@ $(document).ready(function(){
 			map: map,
 			title: 'location'
 			});
+
+		//var latlng=new google.maps.LatLng(data.lon, data.lat);
+
+		geocoder.geocode({'latLng': event.latLng}, function(results, status) {
+		    if (status == google.maps.GeocoderStatus.OK) {
+		      if (results[1]) {
+		        map.setZoom(11);
+
+		        $("#Address").val(results[1].formatted_address);
+
+		      } else {
+		        alert('No results found');
+		      }
+		    } else {
+		      alert('Geocoder failed due to: ' + status);
+		    }
+		  });
 	});
 
 
@@ -141,16 +161,19 @@ $(document).ready(function(){
 		data.lat=$('#latInput').val();
 		data.lon=$('#lonInput').val();
 		data.desc=$('#descInput').val();
+		data.addr=$('#addrInput').val();
 
-		if(data.lat==undefined||data.lon==undefined||data.desc==undefined){
+		if(data.lat==undefined||data.lon==undefined||data.desc==undefined||data.addr==undefined){
 			alert("please fill all the blanks");
 			return;
 		}
 
-		if(data.lat==""||data.lon==""||data.desc==""){
+		if(data.lat==""||data.lon==""||data.desc==""||data.addr==""){
 			alert("please fill all the blanks");
 			return;
 		}
+
+		
 		
 
 		$.ajax({
@@ -223,6 +246,11 @@ $(document).ready(function(){
 				<div class="input-group">
 				  	<span class="input-group-addon">Description</span>
 				  	<input type="text" id="descInput" name="desc" class="form-control" placeholder="Description" aria-describedby="basic-addon2">
+				</div>
+
+				<div class="input-group">
+				  	<span class="input-group-addon">Address</span>
+				  	<input type="text" id="addrinput" name="desc" class="form-control" placeholder="Address" aria-describedby="basic-addon2">
 				</div>
 
 				<!--<div class='input-group date' id='datetimepicker1'>

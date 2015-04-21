@@ -25,20 +25,9 @@ $(document).ready(function(){
 	map.setTilt(0);
     var infoWindow = new google.maps.InfoWindow;
 
-    //street viewer
-    google.maps.event.addListener(map, 'click', function(e) {
-	    //map.setZoom(8);
-	    //map.setCenter(marker.getPosition());
-	 //    var marker = new google.maps.Marker({
-		//     position: e.latLng,
-		//     map: map,
-		//     title: 'Click to zoom'
-		// });
-
-		//marker.
-
-		var panoramaOptions = {
-		  position: e.latLng,
+    function popGoogleStreetView(event){
+	var panoramaOptions = {
+		  position: event.latLng,
 		  pov: {
 		    heading: 34,
 		    pitch: 10
@@ -49,10 +38,10 @@ $(document).ready(function(){
 		map.setStreetView(panorama);
 		
 		$( "#dialog" ).dialog( "open" );
-	});
+	};
 
     //zip code
-    /*var overlay_options = {
+    var overlay_options = {
 		getTileUrl : function(coord, zoom) {
 			//return 'http://mt0.google.com/vt/lyrs=m@169010401,highlight:0x8628cfb25938b6c7:0x25bb73aa81b98232@1%7Cstyle:maps,highlight:0x8629196e6ca28391:0x40f089ab362d3930@1%7Cstyle:maps&hl=en&x=' + coord.x + '&y=' + coord.y + '&z=' + zoom + '&s=G'
 			//if (highlight != null && highlight.length > 0) {
@@ -64,9 +53,30 @@ $(document).ready(function(){
 		tileSize : new google.maps.Size(256, 256),
 		// opacity: 0.3,
 		isPng : true
-	};*/
+	};
 
-	//var overlay = new google.maps.ImageMapType(overlay_options);
+	var overlay = new google.maps.ImageMapType(overlay_options);
+
+	$("#isZipCodeVisible").click(function(){
+		if($(this).is(':checked')){
+			map.overlayMapTypes.insertAt(0, overlay);
+		}
+		else{
+			  map.overlayMapTypes.setAt(0, null); 
+		}
+	});
+
+	$("#isGoogleStreetViewVisible").click(function(){
+		if($(this).is(':checked')){
+			//street viewer
+		    listenerHandle=google.maps.event.addListener(map, 'click', popGoogleStreetView);
+		}
+		else{
+			if(listenerHandle!=undefined)
+				google.maps.event.removeListener(listenerHandle);
+		}
+	});
+
 	//map.overlayMapTypes.insertAt(0, overlay);
 
 
@@ -105,9 +115,10 @@ $(document).ready(function(){
   			bindInfoWindow(marker, map, infoWindow, html);
 
   			//add to list
-  			var url="testURL";
-  			var date="testDate";
-  			var desc="testDesc";
+  			var url=value.url;
+  			var date=value.date;
+  			var desc=value.desc;
+  			var addr=value.addr;
 
   			var flagImage=new FlagImage(url, marker, date, desc);
 

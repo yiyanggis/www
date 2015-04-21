@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>upload CSV and geocode address</title>
+
+<style>
+	html, body, #map {
+	height: 100%;
+	/*margin: 0px;
+	padding: 0px*/
+	}
+
+	.controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        position:absolute;
+        top:0px;
+        left:0px;
+      }
+
+	#pac-input {
+		background-color: #fff;
+		font-family: Roboto;
+		font-size: 15px;
+		font-weight: 300;
+		margin-left: 12px;
+		padding: 0 11px 0 13px;
+		text-overflow: ellipsis;
+		width: 400px;
+	}
+
+	.input-group{
+		margin: 5px;
+	}
+
+	.dropover{
+		background:cyan;
+	}
+
+</style>
+
+<!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="/js/moment.js"></script>
+
+<script type="text/javascript" src="/js/d3.min.js"></script>
+
+<script type="text/javascript" src="js/spin.js"></script>
+
+<script>
+
+var date;
+var data={};
+var data2=new FormData();
+
+var keys=[];
+
+var csvData;
+
+var filepath;
+
+var filename;
+
+var opts = {
+  lines: 13, // The number of lines to draw
+  length: 20, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 0, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 1, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: '50%', // Top position relative to parent
+  left: '50%' // Left position relative to parent
+};
+
+var target;
+var spinner;
+
+var fieldSelect;
+
+$(document).ready(function(){
+
+	//dnd
+	var dropZone=$("#dropZone");
+	target = document.getElementById('dropZone');
+	spinner = new Spinner(opts);
+
+	fieldSelect=$("#fieldSelect");
+	fieldSelect.hide();
+
+	$("#download").hide();
+
+	// Optional.   Show the copy icon when dragging over.  Seems to only work for chrome.
+    dropZone.on('dragover', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        $(this).addClass('dropover');
+        //e.dataTransfer.dropEffect = 'copy';
+    });
+
+    dropZone.on('dragleave', function(e) {
+        $(this).removeClass('dropover');
+    });
+
+    // Get file data on drop
+    dropZone.on('drop', function(e) {
+
+    	$(this).removeClass('dropover');
+
+        e.stopPropagation();
+        e.preventDefault();
+        var files = e.originalEvent.dataTransfer.files; // Array of all files
+        $('#csvinput').files=e.originalEvent.dataTransfer.files;
+
+        //$('#csvinput').val(files[0].name);
+        $('#uploadFileName').text("File chosen: "+files[0].name);
+
+        $.each(files, function(key, value)
+	    {
+	        data2.append(key, value);
+	    });
+
+		filename=files[0].name;
+		date=new Date(files[0].lastModifiedDate);
+
+		var dateStr=date.toGMTString();
+
+		data.dateStr=dateStr;
+    });
+
+
+	$('#csvinput').change(function(){ 
+
+		//console.log(this.files.length);
+
+		$.each(this.files, function(key, value)
+	    {
+	        data2.append(key, value);
+	    });
+
+		filename=this.files[0].name;
+
+		$('#uploadFileName').text("File chosen: "+filename);
+
+		date=new Date(this.files[0].lastModifiedDate);
+
+		var dateStr=date.toGMTString();
+
+		data.dateStr=dateStr;
+
+		
+
+	
+	  	
+		//display result
+	});
+
+	$('#addrSelect').change(function(){
+		//$("#submitBtn2").removeAttr('disabled');
+	});
+
+	$('#submitBtn2').click(function(){
+
+		var addressField=$("#addrSelect").val();
+		var cityField=$("#citySelect").val();
+		var stateField=$("#stateSelect").val();
+		var zipField=$("#zipSelect").val();
+
+		//var address=addressField+","+cityField+","+stateField+","+zipField;
+
+		var total=csvData.length;
+		var current=0;
+		var rate=0;
+		$("#progressbar").attr("style","width:0%");
+		if(csvData!==undefined){
+			$.each(csvData,function(index,value){
+				if(index==0){
+					return true;
+				}
+
+				//current=index;
+				//console.log(index+","+value[addressField]);
+				var address=value[addressField]+","+value[cityField]+","+value[stateField]+","+value[zipField];
+				console.log(address);
+              $.ajax({
+                //url:"https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false&key=AIzaSyCp1HWib0Es6rZGsfylHOZMawOiOZYx3Q4",
+                url:"http://nominatim.openstreetmap.org/search/"+address+"?format=json&addressdetails=1&limit=1&polygon_geojson=1"
+                //,async:false
+              }).done(function(d){
+
+              	current+=1;
+
+                console.log(d);
+                if(d.length!=0){
+					value.X=d[0].lon;
+	                value.Y=d[0].lat;
+
+	                rate=current*100.0/total;
+	                $("#progressbar").attr("style","width:"+rate+"%");
+	                $("#progressbarText").text(current+"/"+total);
+                }
+                
+                /*if(d.status=="OK")//ZERO_RESULTS
+                {
+                  console.log(d);
+                  value.X=d.results[0].geometry.location.lng;
+                  value.Y=d.results[0].geometry.location.lat;
+                  rate=current*100.0/total;
+                  $("#progressbar").attr("style","width:"+rate+"%");
+                  $("#progressbarText").text(current+"/"+total);
+                }*/
+
+
+              });
+
+	        });
+
+	        $("#download").show();
+
+	        // var csvContent="data:text/csv;charset=utf-8,";
+
+	        // $.each(csvData,function(index,value){
+	        //     csvContent+=index+","+value.X+","+value.Y+","+"\n";
+
+	        // });
+
+	        // var encodeUri=encodeURI(csvContent);
+	        // window.open(encodeUri);
+		}
+		// data.lat=$('#latInput').val();
+		// data.lon=$('#lonInput').val();
+		// data.desc=$('#descInput').val();
+
+		// $.ajax({
+		// 	type:"POST",
+		//   	url: "insertmysql2.php",
+		//   	dataType: "json",
+		//   	data: data,
+		//   	success:function(d){
+		//   		console.log(d);
+		//   	}
+		// });
+
+		// $.ajax({
+		// 	type:"POST",
+		//   	url: "insertmysql3.php",
+		//   	dataType: "json",
+		//   	data: data2,
+		//   	processData: false, // Don't process the files
+  //       	contentType: false,
+		//   	success:function(d){
+		//   		console.log(d);
+		//   	}
+		// });
+
+		//select columns and geocode
+
+
+	});
+
+	$('#downloadBtn').click(function(){
+		//add header back to csv
+	        var headerRow={};
+	        $.each(keys, function(key, value) {   
+			     headerRow[key]=value;
+			});
+			headerRow[Object.keys(headerRow).length]="longitude";
+			headerRow[Object.keys(headerRow).length]="latitude";
+
+			csvData.splice(0,0,headerRow);
+
+
+	        $.ajax({
+	        	type:"POST",
+			  	url: "generateCSV.php",
+			  	dataType: "json",
+			  	data: {"data":csvData},
+			  	success:function(d){
+			  		window.location='download.php'
+			  	}
+	        });
+	});
+
+	$('#uploadBtn').click(function(){
+		//ajax post to php
+		var fileExt=filename.split('.');
+		fileExt=fileExt[fileExt.length-1];
+
+		if(fileExt!='csv'){
+			alert("only csv file is allowwed");
+			return;
+		}
+
+		spinner.spin(target);
+
+		$.ajax({
+			type:"POST",
+		  	url: "uploadCSV.php",
+		  	dataType: "json",
+		  	data: data2,
+		  	processData: false, // Don't process the files
+        	contentType: false,
+		  	success:function(d){
+		  		console.log(d);
+
+		  		//d3 read csv
+		  		d3.csv(d.path, function(csv) {
+		  			console.log(csv);
+		  			csvData=csv;
+		  			filepath=d.path;
+		  			keys=Object.keys(csv[0]);
+	            	//csv.forEach(function(row) {
+	                //console.log(Object.keys(row));
+	            	//});
+		  			$.each(keys, function(key, value) {   
+					     /*$('#latSelect')
+					         .append($("<option></option>")
+					         .attr("value",key)
+					         .text(value)); 
+					     $('#lonSelect')
+					         .append($("<option></option>")
+					         .attr("value",key)
+					         .text(value)); */
+				         $('#addrSelect')
+					         .append($("<option></option>")
+					         .attr("value",value)
+					         .text(value)); 
+
+					     $('#citySelect')
+					         .append($("<option></option>")
+					         .attr("value",value)
+					         .text(value)); 
+
+					     $('#stateSelect')
+					         .append($("<option></option>")
+					         .attr("value",value)
+					         .text(value)); 
+
+					     $('#zipSelect')
+					         .append($("<option></option>")
+					         .attr("value",value)
+					         .text(value)); 
+					});
+        		});
+
+        		spinner.stop();
+        		fieldSelect.show();
+		  	}
+		});
+
+		$("#submitBtn2").removeAttr('disabled');
+	});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+	
+
+	
+	<div style="width:400px;margin-left: auto; margin-right: auto;" id="dropZone">
+		<!--<form name="form-inline">-->
+
+			<!--<input name="MAX_FILE_SIZE" value="102400" type="hidden">
+			<input name="image" accept="image/jpeg" type="file">
+			<input value="Submit" type="submit">-->
+			<div class="form-group">
+				<div class="input-group">
+				  	<span class="input-group-addon" id="basic-addon1">File</span>
+				  	<input id="csvinput" name="csv" accept=".csv" type="file" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+				</div>
+				<div id="uploadFileDiv">
+					<span id="uploadFileName"></span>
+				</div>
+				<button id="uploadBtn" class="btn btn-primary">upload</button>
+			</div>
+			
+
+			<!--<div class="input-group">
+				<span class="input-group-addon" id="basic-addon2">Latitude</span>
+			  	<!--<input type="text" id="latInput" name="lat" class="form-control" placeholder="latitude" aria-describedby="basic-addon2">
+			  	<select id="latSelect" class="form-control">
+				    
+				</select>
+			</div>
+
+			<div class="input-group">
+			  	<span class="input-group-addon">Longitude</span>
+			  	<select id="lonSelect" class="form-control">
+				    
+				</select>
+			</div>> -->
+			<div id="fieldSelect">
+				<div class="input-group">
+				  	<span class="input-group-addon">Address</span>
+				  	<select id="addrSelect" class="form-control">
+					    
+					</select>
+				</div>
+
+				<div class="input-group">
+				  	<span class="input-group-addon">City</span>
+				  	<select id="citySelect" class="form-control">
+					    
+					</select>
+				</div>
+
+				<div class="input-group">
+				  	<span class="input-group-addon">State</span>
+				  	<select id="stateSelect" class="form-control">
+					    
+					</select>
+				</div>
+
+				<div class="input-group">
+				  	<span class="input-group-addon">ZipCode</span>
+				  	<select id="zipSelect" class="form-control">
+					    
+					</select>
+				</div>
+				<!--</form>-->
+				<div>
+					<button id="submitBtn2" disabled class="btn btn-primary">Submit</button>
+				</div>
+
+				<div class="progress">
+				  <div class="progress-bar" id="progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+				    <span  id="progressbarText"></span><!--class="sr-only"-->
+				  </div>
+				</div>
+
+			</div>
+
+			<!-- <div class='input-group date' id='datetimepicker1'>
+				<input type='text' name='date' class="form-control" />
+				<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+				</span>
+			</div>
+
+			<script type="text/javascript">
+			$(function () {
+				$('#datetimepicker1').datetimepicker();
+			});
+			</script>-->
+
+			<!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
+
+			<div id="download" >
+				<button id="downloadBtn" class="btn btn-primary">Download</button>
+			</div>
+			
+	</div>
+</body>
+
+</html>
+
+
