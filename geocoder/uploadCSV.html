@@ -152,58 +152,101 @@ $(document).ready(function(){
 
 	$('#submitBtn2').click(function(){
 
+		var geocoder=$("#geocoderSelect").val();
+
 		addressField=$("#addrSelect").val();
 		var total=csvData.length;
 		var current=0;
 		var rate=0;
 		$("#progressbar").attr("style","width:0%");
 		if(csvData!==undefined){
-			$.each(csvData,function(index,value){
+			if(geocoder=="google"){
+				$.each(csvData,function(index,value){
 
-				//current=index+1;
-				console.log(index+","+value[addressField]);
-              $.ajax({
-                url:"https://maps.googleapis.com/maps/api/geocode/json?address="+value[addressField]+"&sensor=false&key=AIzaSyCp1HWib0Es6rZGsfylHOZMawOiOZYx3Q4",
-                async:false
-              }).done(function(d){
+					//current=index+1;
+					console.log(index+","+value[addressField]);
+	              $.ajax({
+	                url:"https://maps.googleapis.com/maps/api/geocode/json?address="+value[addressField]+"&sensor=false&key=AIzaSyCp1HWib0Es6rZGsfylHOZMawOiOZYx3Q4",
+	                //async:false
+	              }).done(function(d){
 
-              	current+=1;
+	              	current+=1;
 
-                if(d.status=="OK")//ZERO_RESULTS
-                {
-                  console.log(d);
-                  value.X=d.results[0].geometry.location.lng;
-                  value.Y=d.results[0].geometry.location.lat;
-                  rate=current*100.0/total;
-                  $("#progressbar").attr("style","width:"+rate+"%");
-                  $("#progressbarText").text(current+"/"+total);
-                }
-
-
-              });
-
-	        });
-
-	        //add header back to csv
-	        var headerRow={};
-	        $.each(keys, function(key, value) {   
-			     headerRow[key]=value;
-			});
-			headerRow[Object.keys(headerRow).length]="longitude";
-			headerRow[Object.keys(headerRow).length]="latitude";
-
-			csvData.splice(0,0,headerRow);
+	                if(d.status=="OK")//ZERO_RESULTS
+	                {
+	                  console.log(d);
+	                  value.X=d.results[0].geometry.location.lng;
+	                  value.Y=d.results[0].geometry.location.lat;
+	                  rate=current*100.0/total;
+	                  $("#progressbar").attr("style","width:"+rate+"%");
+	                  $("#progressbarText").text(current+"/"+total);
+	                }
 
 
-	        $.ajax({
-	        	type:"POST",
-			  	url: "generateCSV.php",
-			  	dataType: "json",
-			  	data: {"data":csvData},
-			  	success:function(d){
-			  		window.location='download.php'
-			  	}
-	        });
+	              });
+
+		        });
+	        }
+	        else if(geocoder=="OSM"){
+	        	$.each(csvData,function(index,value){
+					
+					
+					console.log(index+","+value[addressField]);
+	              $.ajax({
+	                url:"http://nominatim.openstreetmap.org/search/"+value[addressField]+"?format=json&addressdetails=1&limit=1&polygon_geojson=1"
+	                //,async:false
+	              }).done(function(d){
+
+	              	current+=1;
+
+	                console.log(d);
+	                if(d.length!=0){
+						value.X=d[0].lon;
+		                value.Y=d[0].lat;
+
+		                rate=current*100.0/total;
+		                $("#progressbar").attr("style","width:"+rate+"%");
+		                $("#progressbarText").text(current+"/"+total);
+	                }
+	                
+	                /*if(d.status=="OK")//ZERO_RESULTS
+	                {
+	                  console.log(d);
+	                  value.X=d.results[0].geometry.location.lng;
+	                  value.Y=d.results[0].geometry.location.lat;
+	                  rate=current*100.0/total;
+	                  $("#progressbar").attr("style","width:"+rate+"%");
+	                  $("#progressbarText").text(current+"/"+total);
+	                }*/
+
+
+	              });
+
+		        });
+	        }
+
+	        $("#download").show();
+
+	  //       //add header back to csv
+	  //       var headerRow={};
+	  //       $.each(keys, function(key, value) {   
+			//      headerRow[key]=value;
+			// });
+			// headerRow[Object.keys(headerRow).length]="longitude";
+			// headerRow[Object.keys(headerRow).length]="latitude";
+
+			// csvData.splice(0,0,headerRow);
+
+
+	  //       $.ajax({
+	  //       	type:"POST",
+			//   	url: "generateCSV.php",
+			//   	dataType: "json",
+			//   	data: {"data":csvData},
+			//   	success:function(d){
+			//   		window.location='download.php'
+			//   	}
+	  //       });
 
 	        // var csvContent="data:text/csv;charset=utf-8,";
 
@@ -244,6 +287,29 @@ $(document).ready(function(){
 		//select columns and geocode
 
 
+	});
+
+	$('#downloadBtn').click(function(){
+		//add header back to csv
+	        var headerRow={};
+	        $.each(keys, function(key, value) {   
+			     headerRow[key]=value;
+			});
+			headerRow[Object.keys(headerRow).length]="longitude";
+			headerRow[Object.keys(headerRow).length]="latitude";
+
+			csvData.splice(0,0,headerRow);
+
+
+	        $.ajax({
+	        	type:"POST",
+			  	url: "generateCSV.php",
+			  	dataType: "json",
+			  	data: {"data":csvData},
+			  	success:function(d){
+			  		window.location='download.php'
+			  	}
+	        });
 	});
 
 	$('#uploadBtn').click(function(){
@@ -363,14 +429,25 @@ $(document).ready(function(){
 
 
 		<!--</form>-->
-		<div>
-			<button id="submitBtn2" disabled class="btn btn-primary">Submit</button>
+
+		<div class="input-group">
+		  	<span class="input-group-addon" style="padding: 0px 0px;"><button id="submitBtn2" disabled class="btn btn-primary">Submit</button></span>
+		  	<select id="geocoderSelect" class="form-control">
+			    <option value="google">Google</option>
+			    <option value="OSM">OSM</option>
+			    <option value="Census">Census</option>
+			</select>
+			
 		</div>
 
 		<div class="progress">
 		  <div class="progress-bar" id="progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
 		    <span  id="progressbarText"></span><!--class="sr-only"-->
 		  </div>
+		</div>
+
+		<div id="download" >
+			<button id="downloadBtn" class="btn btn-primary">Download</button>
 		</div>
 	</div>
 </body>

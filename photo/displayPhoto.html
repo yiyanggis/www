@@ -19,6 +19,7 @@
 <script src="js/imageFunctions.js"></script>
 
 <script src="js/displayPhoto.js"></script>
+<script src="js/googlePlaceFunctions.js"></script>
 <script src="js/bootstrap.js"></script>
 <script src="js/jqueryUI/jquery-ui.js"></script>
 
@@ -43,6 +44,11 @@ var photoImages=[];
 
 var listenerHandle;
 
+var map;
+
+var googlePlaceFinder;
+
+var thumbnailDomid;
 
 function bindInfoWindow(marker, map, infoWindow, html) {
       google.maps.event.addListener(marker, 'click', function() {
@@ -107,13 +113,13 @@ function bindInfoWindow(marker, map, infoWindow, html) {
 				    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 				      <div class="panel-body">
 				        <div class="row">
-						    <div class="thumbnail">
-						      <img src="..." alt="...">
-						      <div class="caption">
+						    <div class="thumbnail" id="thumbnail">
+						      
+						      <!--<div class="caption">
 						        <h3>Thumbnail label</h3>
 						        <p>...</p>
 						        
-						      </div>
+						      </div>-->
 						    </div>
 						</div>
 				      </div>

@@ -1,6 +1,8 @@
 $(document).ready(function(){
 
-	var map = new google.maps.Map(document.getElementById("map"), {
+
+
+	map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(28.6145, -81.5418),
         zoom: 10,
         mapTypeId: 'roadmap',
@@ -24,6 +26,8 @@ $(document).ready(function(){
 
 	map.setTilt(0);
     var infoWindow = new google.maps.InfoWindow;
+
+    googlePlaceFinder=new GooglePlaceFinder(map);
 
     function popGoogleStreetView(event){
 	var panoramaOptions = {
@@ -115,18 +119,25 @@ $(document).ready(function(){
   			bindInfoWindow(marker, map, infoWindow, html);
 
   			//add to list
-  			var url=value.url;
+  			var url=value.path;
   			var date=value.date;
   			var desc=value.desc;
   			var addr=value.addr;
 
-  			var flagImage=new FlagImage(url, marker, date, desc);
+  			var flagImage=new FlagImage(url, marker, date, desc,addr);
 
   			photoImages.push(flagImage);
 
   			var ImageNode="<li class='imageNode list-group-item list-group-item-success' value='"+index+"'><a id='image"+index+"'>"+value.desc+"</a></li>"
 
+  			
   			$(ImageNode).appendTo($("#imageList"));
+
+  	// 		$(ImageNode).on("click",function(){
+			// 	alert("asd");
+			// 	var id=this.value;
+			// 	photoImages[id].focusOn();
+			// });
   		});
 
   		var markerCluster = new MarkerClusterer(map, photoMarkers);
@@ -134,7 +145,12 @@ $(document).ready(function(){
   		$(".imageNode").on("click",function(){
 			//alert("asd");
 			var id=this.value;
-			photoImages[id].focusOn();
+			var photoImage=photoImages[id];
+			photoImage.focusOn(map);
+
+			photoImage.setDetailInfo("thumbnail",googlePlaceFinder);
+
+
 		});
 
 	});

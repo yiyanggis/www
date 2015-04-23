@@ -91,3 +91,8 @@ html, body {
 	.imageNode{
 		cursor:pointer;
 	}
+
+	.imageThumbnail{
+		width:150px;
+		height:100px;
+	}
