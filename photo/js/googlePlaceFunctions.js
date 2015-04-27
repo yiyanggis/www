@@ -31,6 +31,18 @@ GooglePlaceFinder.prototype.getPlaceID=function(latlng,radius,callback){
 
 }
 
+GooglePlaceFinder.prototype.getDetails=function(id,callback){
+	var request = {
+	  placeId: id
+	};
+
+	if(this.service!=undefined){
+		//this.service.nearbySearch(request, GooglePlaceFinder.prototype.callback);
+		this.service.getDetails(request, callback);
+	}
+
+}
+
 GooglePlaceFinder.prototype.callback=function(results,status){
 	console.log(results);
 	this.results=results;

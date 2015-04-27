@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-
+	//service = new google.maps.places.PlacesService(map);
 
 	map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(28.6145, -81.5418),
@@ -147,6 +147,8 @@ $(document).ready(function(){
 			var id=this.value;
 			var photoImage=photoImages[id];
 			photoImage.focusOn(map);
+
+			$("#thumbnail").empty();
 
 			photoImage.setDetailInfo("thumbnail",googlePlaceFinder);
 
