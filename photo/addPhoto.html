@@ -119,7 +119,7 @@ $(document).ready(function(){
 		      if (results[1]) {
 		        map.setZoom(11);
 
-		        $("#Address").val(results[1].formatted_address);
+		        $("#addrInput").val(results[1].formatted_address);
 
 		      } else {
 		        alert('No results found');
@@ -186,6 +186,7 @@ $(document).ready(function(){
 		  	success:function(d){
 		  		if(d.success){
 		  			console.log(d);
+		  			alert("upload success");
 
 		  		data.path=d.path;
 
@@ -196,6 +197,7 @@ $(document).ready(function(){
 				  	data: data,
 				  	success:function(dd){
 				  		console.log(dd);
+
 				  	}
 				});
 		  		}
@@ -250,7 +252,7 @@ $(document).ready(function(){
 
 				<div class="input-group">
 				  	<span class="input-group-addon">Address</span>
-				  	<input type="text" id="addrinput" name="desc" class="form-control" placeholder="Address" aria-describedby="basic-addon2">
+				  	<input type="text" id="addrInput" name="desc" class="form-control" placeholder="Address" aria-describedby="basic-addon2">
 				</div>
 
 				<!--<div class='input-group date' id='datetimepicker1'>
