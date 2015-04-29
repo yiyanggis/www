@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Leaflet debug page</title>
+
+	<!--<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7/leaflet.css" />-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	<!--<script src="http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"></script>-->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" href="css/leaflet.css"/>
+	<!--<script src="js/Leaflet/Leaflet.js"/>-->
+
+	<link rel="stylesheet" href="css/screen.css" />
+
+	<link rel="stylesheet" href="css/MarkerCluster.css" />
+	<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+	
+	<script src="js/leaflet-src.js"/>
+	<script src="js/markercluster-src.js"></script>
+	
+	
+	
+	<script src="js/Leaflet.markercluster/MarkerCluster.js"></script>
+	<script src="js/Leaflet.markercluster/MarkerClusterGroup.js"></script>
+	<script src="js/Leaflet.markercluster/PhotoMarkerClusterGroup.js"></script>
+	<script src="js/Leaflet.markercluster/MarkerCluster.QuickHull.js"></script>
+	<script src="js/Leaflet.markercluster/MarkerCluster.Spiderfier.js"></script>
+	<script src="js/Leaflet.markercluster/MarkerOpacity.js"></script>
+	<script src="js/Leaflet.markercluster/DistanceGrid.js"></script>
+</head>
+<body>
+
+	<div id="map"></div>
+	<button id="populate">Populate 1 marker</button>
+	<button id="remove">Remove 1 marker</button>
+
+	<script type="text/javascript">
+
+		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+				maxZoom: 22,
+				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			}),
+			latlng = new L.LatLng(49.28, -123.113);
+
+		var map = new L.Map('map', {center: latlng, zoom: 15, layers: [tiles]});
+
+		//var markers = new L.MarkerClusterGroup();
+		var markers = new L.MarkerClusterGroup();
+		var markersList = [];
+
+
+		function populate() {
+			for (var i = 0; i < 200; i++) {
+				var m = new L.Marker(getRandomLatLng(map));
+				markersList.push(m);
+				markers.addLayer(m);
+			}
+			return false;
+		}
+
+		function collectTwitter(){
+			$.ajax({
+			  url: "http://74.221.133.114:3001/api/v1/ambient_temporal_twitter?west=-123.1140000000&south=49.2790000000&east=-123.1120000&north=49.281000000&begin=1426204800&end=1427241600",
+			  asyn:false
+			})
+		  	.done(function( data ) {
+		  		//console.log(data);
+
+		  		data.forEach(function(element, index, array){
+		  			if(element.location.type=="Point"){
+		  				var coordinates=element.location.coordinates;
+			  			var m=new L.Marker(new L.latLng(coordinates[1],coordinates[0])).bindPopup(element.data.text);
+			  			markersList.push(m);
+			  			markers.addLayer(m);
+		  			}
+		  			
+		  		});
+
+		  		map.addLayer(markers);
+		  	});
+		}
+		function populateRandomVector() {
+			for (var i = 0, latlngs = [], len = 20; i < len; i++) {
+				latlngs.push(getRandomLatLng(map));
+			}
+			var path = new L.Polyline(latlngs);
+			map.addLayer(path);
+		}
+		function getRandomLatLng(map) {
+			var bounds = map.getBounds(),
+				southWest = bounds.getSouthWest(),
+				northEast = bounds.getNorthEast(),
+				lngSpan = northEast.lng - southWest.lng,
+				latSpan = northEast.lat - southWest.lat;
+
+			return new L.LatLng(
+					southWest.lat + latSpan * Math.random(),
+					southWest.lng + lngSpan * Math.random());
+		}
+
+		markers.on('clusterclick', function (a) {
+			//alert('cluster ' + a.layer.getAllChildMarkers().length);
+		});
+		markers.on('click', function (a) {
+			//alert('marker ' + a.layer);
+		});
+
+		//populate();
+		collectTwitter();
+		//map.addLayer(markers);
+
+		L.DomUtil.get('populate').onclick = function () {
+			var bounds = map.getBounds(),
+			southWest = bounds.getSouthWest(),
+			northEast = bounds.getNorthEast(),
+			lngSpan = northEast.lng - southWest.lng,
+			latSpan = northEast.lat - southWest.lat;
+			var m = new L.Marker(new L.LatLng(
+					southWest.lat + latSpan * 0.5,
+					southWest.lng + lngSpan * 0.5));
+			markersList.push(m);
+			markers.addLayer(m);
+		};
+		L.DomUtil.get('remove').onclick = function () {
+			markers.removeLayer(markersList.pop());
+		};
+	</script>
+</body>
+</html>

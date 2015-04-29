@@ -1,0 +1,218 @@
+.marker-cluster-small {
+	background-color: rgba(181, 226, 140, 0.6);
+	}
+.marker-cluster-small div {
+	background-color: rgba(110, 204, 57, 0.6);
+	}
+
+.marker-cluster-medium {
+	background-color: rgba(241, 211, 87, 0.6);
+	}
+.marker-cluster-medium div {
+	background-color: rgba(240, 194, 12, 0.6);
+	}
+
+.marker-cluster-large {
+	background-color: rgba(253, 156, 115, 0.6);
+	}
+.marker-cluster-large div {
+	background-color: rgba(241, 128, 23, 0.6);
+	}
+
+	/* IE 6-8 fallback colors */
+.leaflet-oldie .marker-cluster-small {
+	background-color: rgb(181, 226, 140);
+	}
+.leaflet-oldie .marker-cluster-small div {
+	background-color: rgb(110, 204, 57);
+	}
+
+.leaflet-oldie .marker-cluster-medium {
+	background-color: rgb(241, 211, 87);
+	}
+.leaflet-oldie .marker-cluster-medium div {
+	background-color: rgb(240, 194, 12);
+	}
+
+.leaflet-oldie .marker-cluster-large {
+	background-color: rgb(253, 156, 115);
+	}
+.leaflet-oldie .marker-cluster-large div {
+	background-color: rgb(241, 128, 23);
+}
+
+.marker-cluster {
+	background-clip: padding-box;
+	border-radius: 20px;
+	}
+.marker-cluster div {
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 5px;
+
+	text-align: center;
+	border-radius: 15px;
+	font: 12px "Helvetica Neue", Arial, Helvetica, sans-serif;
+	}
+.marker-cluster span {
+	line-height: 30px;
+	}
+
+.marker-cluster-21{
+	border-radius: 21px;
+}
+.marker-cluster-22{
+	border-radius: 22px;
+}
+.marker-cluster-23{
+	border-radius: 23px;
+}
+.marker-cluster-24{
+	border-radius: 24px;
+}
+.marker-cluster-25{
+	border-radius: 25px;
+}
+.marker-cluster-26{
+	border-radius: 26px;
+}
+.marker-cluster-27{
+	border-radius: 27px;
+}
+.marker-cluster-28{
+	border-radius: 28px;
+}
+.marker-cluster-29{
+	border-radius: 29px;
+}
+.marker-cluster-30{
+	border-radius: 30px;
+}
+.marker-cluster-31{
+	border-radius: 31px;
+}
+.marker-cluster-32{
+	border-radius: 32px;
+}
+.marker-cluster-33{
+	border-radius: 33px;
+}
+.marker-cluster-34{
+	border-radius: 34px;
+}
+.marker-cluster-35{
+	border-radius: 35px;
+}
+.marker-cluster-36{
+	border-radius: 36px;
+}
+.marker-cluster-37{
+	border-radius: 37px;
+}
+.marker-cluster-38{
+	border-radius: 38px;
+}
+.marker-cluster-39{
+	border-radius: 39px;
+}
+.marker-cluster-40{
+	border-radius: 40px;
+}
+
+.marker-cluster-41{
+	border-radius: 41px;
+}
+.marker-cluster-42{
+	border-radius: 42px;
+}
+.marker-cluster-43{
+	border-radius: 43px;
+}
+.marker-cluster-44{
+	border-radius: 44px;
+}
+.marker-cluster-45{
+	border-radius: 45px;
+}
+.marker-cluster-46{
+	border-radius: 46px;
+}
+.marker-cluster-47{
+	border-radius: 47px;
+}
+.marker-cluster-48{
+	border-radius: 48px;
+}
+.marker-cluster-49{
+	border-radius: 49px;
+}
+.marker-cluster-50{
+	border-radius: 50px;
+}
+
+.marker-cluster-51{
+	border-radius: 51px;
+}
+.marker-cluster-52{
+	border-radius: 52px;
+}
+.marker-cluster-53{
+	border-radius: 53px;
+}
+.marker-cluster-54{
+	border-radius: 54px;
+}
+.marker-cluster-55{
+	border-radius: 55px;
+}
+.marker-cluster-56{
+	border-radius: 56px;
+}
+.marker-cluster-57{
+	border-radius: 57px;
+}
+.marker-cluster-58{
+	border-radius: 58px;
+}
+.marker-cluster-59{
+	border-radius: 59px;
+}
+.marker-cluster-60{
+	border-radius: 60px;
+}
+.marker-cluster-61{
+	border-radius: 61px;
+}
+.marker-cluster-62{
+	border-radius: 62px;
+}
+.marker-cluster-63{
+	border-radius: 63px;
+}
+.marker-cluster-64{
+	border-radius: 64px;
+}
+.marker-cluster-65{
+	border-radius: 65px;
+}
+.marker-cluster-66{
+	border-radius: 66px;
+}
+.marker-cluster-67{
+	border-radius: 67px;
+}
+.marker-cluster-68{
+	border-radius: 68px;
+}
+.marker-cluster-69{
+	border-radius: 69px;
+}
+.marker-cluster-70{
+	border-radius: 70px;
+}
+
+
+.marker-cluster-100{
+	border-radius: 100px;
+}
