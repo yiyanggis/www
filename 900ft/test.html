@@ -11,7 +11,11 @@ $(document).ready(function(){
 	  url: "http://74.221.133.114:3001/api/v1/ambient_temporal_twitter?west=-123.1130000000&south=49.2800000000&east=-123.1120000&north=49.281000000&begin=1426204800&end=1427241600",
 	})
   	.done(function( data ) {
-  		console.log(data);
+  		//console.log(data);
+
+  		data.forEach(function(element, index, array){
+  			
+  		});
   	});
 });
 </script>

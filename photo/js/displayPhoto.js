@@ -59,6 +59,21 @@ $(document).ready(function(){
 		isPng : true
 	};
 
+	/*var overlay_options2 = {
+		getTileUrl : function(coord, zoom) {
+			//return 'http://mt0.google.com/vt/lyrs=m@169010401,highlight:0x8628cfb25938b6c7:0x25bb73aa81b98232@1%7Cstyle:maps,highlight:0x8629196e6ca28391:0x40f089ab362d3930@1%7Cstyle:maps&hl=en&x=' + coord.x + '&y=' + coord.y + '&z=' + zoom + '&s=G'
+			//if (highlight != null && highlight.length > 0) {
+			//	return 'http://www.unitedstateszipcodes.org.s3-website-us-east-1.amazonaws.com/tiles/' + highlight + '/' + coord.x + '-' + coord.y + '-' + zoom + '.png';
+			//} else {
+				return 'http://www.themls.com/TileService/CaretsAreaToolTile/%7Bquadkey%7D';
+			//}
+		},
+		tileSize : new google.maps.Size(256, 256),
+		// opacity: 0.3,
+		isPng : true
+	};*/
+
+
 	var overlay = new google.maps.ImageMapType(overlay_options);
 
 	$("#isZipCodeVisible").click(function(){
