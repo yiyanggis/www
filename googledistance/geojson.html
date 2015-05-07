@@ -28,8 +28,8 @@
         1px  1px 0 #000;
       }
 
-      h3{
-        font:10px;
+      h2{
+        font:12px;
         font-stretch: expanded;
         font-weight: 1000;
         color: blue;
@@ -114,7 +114,7 @@ function initialize() {
     else if(id==7){
         color="#FF99FF";
     }
-    else if(id==9||id==15){
+    else if(id==9||id==15||id==39){
         color="#FF9999";
     }
     else if(id==12||id==13||id==14){
@@ -123,16 +123,13 @@ function initialize() {
     else if(id==33){
         color="#FFCC99";
     }
-    else if(id==39){
-        color="#FFCC99";
-    }
     else{
         color="#8C8C8C";
     }
 
     return {
       fillColor: color,
-      fillOpacity:0.6,
+      fillOpacity:0.5,
       strokeWeight: 1,
       strokeColor:"#606060"
     };
@@ -190,12 +187,12 @@ function initialize() {
     }
     if(map.zoom<=13){
       $.each(areaMarkers,function(index, value){
-        value.label.setContent2(areas.features[index].properties.ID>0?"<h3>"+areas.features[index].properties.NAME2+"</h3>":"<h3></h3>");
+        value.label.setContent2(areas.features[index].properties.ID>0?"<h2>"+areas.features[index].properties.NAME2+"</h2>":"<h3></h3>");
       });
     }
     else{
       $.each(areaMarkers,function(index, value){
-        value.label.setContent2(areas.features[index].properties.ID>0?"<h3 sytle='width:200px'>"+areas.features[index].properties.NAME+"</h3>":"<h3></h3>");
+        value.label.setContent2(areas.features[index].properties.ID>0?"<h2 sytle='width:200px'>"+areas.features[index].properties.NAME+"</h2>":"<h3></h3>");
       });
     }
     
@@ -228,7 +225,7 @@ function initialize() {
            draggable: false,
            raiseOnDrag: false,
            map: map,
-           labelContent: value.properties.ID>0?"<h3 sytle='width:200px'>"+value.properties.NAME+"</h3>":"<h3></h3>",
+           labelContent: value.properties.ID>0?"<h2 sytle='width:200px'>"+value.properties.NAME+"</h2>":"<h3></h3>",
            labelAnchor: new google.maps.Point(100, 10),
            labelClass: "labels", // the CSS class for the label
            labelStyle: {opacity: 0.75, width:"200px"},
