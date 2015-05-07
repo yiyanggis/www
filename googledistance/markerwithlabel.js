@@ -238,6 +238,7 @@ MarkerLabel_.prototype.onAdd = function () {
         }
       }
     }),
+    /*
     google.maps.event.addDomListener(this.eventDiv_, "click", function (e) {
       if (me.marker_.getDraggable() || me.marker_.getClickable()) {
         if (cIgnoreClick) { // Ignore the click reported when a label drag ends
@@ -247,7 +248,8 @@ MarkerLabel_.prototype.onAdd = function () {
           cAbortEvent(e); // Prevent click from being passed on to map
         }
       }
-    }),
+    }),*/
+
     google.maps.event.addDomListener(this.eventDiv_, "dblclick", function (e) {
       if (me.marker_.getDraggable() || me.marker_.getClickable()) {
         google.maps.event.trigger(me.marker_, "dblclick", e);

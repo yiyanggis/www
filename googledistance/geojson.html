@@ -46,13 +46,29 @@ var map;
 
 var areaMarkers;
 var areas;
+
+var currentArea;
+
 function initialize() {
+
+  var stylesArray = [
+    {
+      "featureType": "administrative",
+      "elementType": "labels",
+      "stylers": [
+        { "visibility": "off" }
+      ]
+    }
+  ]
+
   map = new google.maps.Map(document.getElementById('map-canvas'), {
     zoom: 14,
     minZoom:12,
     center: {lat: 34.03, lng: -118.5},
     mapTypeID:google.maps.MapTypeId.TERRAIN 
   });
+
+  map.setOptions({styles: stylesArray});
 
   infoWindow = new google.maps.InfoWindow({
     content: ""
@@ -107,13 +123,18 @@ function initialize() {
     else if(id==33){
         color="#FFCC99";
     }
+    else if(id==39){
+        color="#FFCC99";
+    }
     else{
         color="#8C8C8C";
     }
 
     return {
       fillColor: color,
-      strokeWeight: 2
+      fillOpacity:0.6,
+      strokeWeight: 1,
+      strokeColor:"#606060"
     };
   });
   // [END snippet-style]
@@ -122,7 +143,14 @@ function initialize() {
   map.data.addListener('click', function(event) {
     //event.feature.setProperty('isColorful', true);
     console.log(event.feature);
-    window.open(event.feature.A.link);
+    window.open(event.feature.A.link,"_self");
+  });
+
+  map.addListener('click', function(event) {
+    //event.feature.setProperty('isColorful', true);
+    if(currentArea!=undefined){
+      window.open(currentArea.A.link,"_self");
+    }
   });
 
   // When the user hovers, tempt them to click by outlining the letters.
@@ -131,6 +159,7 @@ function initialize() {
   map.data.addListener('mouseover', function(event) {
 
     isIn=true;
+    currentArea=event.feature;
     //map.data.revertStyle();
     map.data.overrideStyle(event.feature, {strokeWeight: 5});
 
@@ -149,6 +178,7 @@ function initialize() {
   map.data.addListener('mouseout', function(event) {
     //infoWindow.close();
     isIn=false;
+    currentArea=null;
     map.data.overrideStyle(event.feature, {strokeWeight: 2});
   });
 
@@ -160,12 +190,12 @@ function initialize() {
     }
     if(map.zoom<=13){
       $.each(areaMarkers,function(index, value){
-        value.label.setContent2("<h3>"+areas.features[index].properties.NAME2+"</h3>");
+        value.label.setContent2(areas.features[index].properties.ID>0?"<h3>"+areas.features[index].properties.NAME2+"</h3>":"<h3></h3>");
       });
     }
     else{
       $.each(areaMarkers,function(index, value){
-        value.label.setContent2("<h3 sytle='width:200px'>"+areas.features[index].properties.NAME+"</h3>"+"<h3>"+areas.features[index].properties.NameShort+"</h3>");
+        value.label.setContent2(areas.features[index].properties.ID>0?"<h3 sytle='width:200px'>"+areas.features[index].properties.NAME+"</h3>":"<h3></h3>");
       });
     }
     
@@ -198,7 +228,7 @@ function initialize() {
            draggable: false,
            raiseOnDrag: false,
            map: map,
-           labelContent: value.properties.ID>0?"<h3 sytle='width:200px'>"+value.properties.NAME+"</h3>"+"<h3>"+value.properties.NameShort+"</h3>":"<h3>"+value.properties.NameShort+"</h3>",
+           labelContent: value.properties.ID>0?"<h3 sytle='width:200px'>"+value.properties.NAME+"</h3>":"<h3></h3>",
            labelAnchor: new google.maps.Point(100, 10),
            labelClass: "labels", // the CSS class for the label
            labelStyle: {opacity: 0.75, width:"200px"},
