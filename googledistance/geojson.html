@@ -104,7 +104,7 @@ function initialize() {
     else if(id==12||id==13||id==14){
         color="#CCFF99";
     }
-    else if(id==29){
+    else if(id==33){
         color="#FFCC99";
     }
     else{
@@ -121,7 +121,8 @@ function initialize() {
   // When the user clicks, set 'isColorful', changing the color of the letters.
   map.data.addListener('click', function(event) {
     //event.feature.setProperty('isColorful', true);
-    
+    console.log(event.feature);
+    window.open(event.feature.A.link);
   });
 
   // When the user hovers, tempt them to click by outlining the letters.
