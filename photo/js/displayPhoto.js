@@ -124,7 +124,7 @@ $(document).ready(function(){
 
   			var marker = new google.maps.Marker({
 		        map: map,
-		        icon: flagIcon.icon,
+		        icon: customIcons.bar.icon,
 		        title: value.desc,
 		        position: point
 		      });

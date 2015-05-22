@@ -19,6 +19,9 @@ use Facebook\GraphUser;
 use Facebook\FacebookRequestException;
 use Facebook\FacebookRedirectLoginHelper;
 
+// Add `use Facebook\FacebookSession;` to top of file
+$session = new FacebookSession('access token here');
+
 
 // Make a new request and execute it.
 try {
