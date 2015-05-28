@@ -1,0 +1,287 @@
+/*--------------------------------------------------------------
+Sticky nav
+--------------------------------------------------------------*/
+.main-navigation.fix{
+	position: fixed !important;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    width: 100%;
+    max-width: 100%;
+	border-bottom: 1px solid #ddd;
+}
+nav#site-navigation.main-navigation.fix{
+	margin:0px !important;
+	padding:0px !important;
+}
+.admin-bar .main-navigation.fix {
+    top: 32px;
+}
+/*--------------------------------------------------------------
+Template tag
+--------------------------------------------------------------*/
+.comments-link:before {
+    font-family: 'ThemeIcons';
+	margin-right:5px;
+    content: "\77";
+}
+.post-edit-link:before {
+    font-family: 'ThemeIcons';
+	margin-right:5px;
+    content: "\6c";
+}
+.tags-links:before {
+    font-family: 'ThemeIcons';
+	margin-right:5px;
+    content: "\e018";
+}
+.cat-links:before {
+    font-family: 'ThemeIcons';
+	margin-right:5px;
+    content: "\6d";
+}
+.comments-link, .post-edit-link, .tags-links, .cat-links {
+	margin-right:5px;
+}
+/*--------------------------------------------------------------
+Widgets
+--------------------------------------------------------------*/
+/* calendar */
+#wp-calendar caption {
+    text-align:center;
+    padding: .25em;
+}
+table#wp-calendar {
+    border:none;
+    padding: 0;
+}
+
+#wp-calendar th, #wp-calendar td {
+   text-align:center;
+} 
+#wp-calendar td#prev {
+    padding: .5em;
+    text-align: left;
+    background:#f6f6f6;
+}
+#wp-calendar td#next {
+    padding: .5em;
+    text-align: right;
+     background:#f6f6f6;
+}
+/* rss */
+.widget_rss ul {
+    margin: 0!important;
+}
+.widget_rss li {
+    list-style: none!important;
+     margin-bottom:.5em;
+}
+.widget_rss img {
+    display: inline-block;
+}
+.widget_rss li  a.rsswidget {
+    font-weight: bold;
+    display: block;
+}
+.widget_rss .rss-date, .widget_rss cite {
+    font-size:.9em;
+}
+.widget_rss li:before {
+    display: none;
+}
+/*recent ul*/
+.widget li:before {
+    font-family: 'ThemeIcons';
+	content: "\35";
+    list-style: none;
+    font-size: 1.2em;
+    vertical-align: bottom;
+     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+    filter: alpha(opacity=50);
+    -moz-opacity: 0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+}
+.widget ul {
+    margin-left: 0;
+}
+.widget li {
+    list-style: none;
+}
+
+/* widget title */
+.widget_archive h3.widget-title:before,
+.widget_recent_entries h3.widget-title:before,
+.widget_categories h3.widget-title:before,
+.widget_recent_comments h3.widget-title:before,
+.widget_calendar h3.widget-title:before,
+.widget_tag_cloud h3.widget-title:before,
+.widget_nav_menu h3.widget-title:before,
+.widget_search h3.widget-title:before {
+    font-family: 'ThemeIcons';
+	margin-right:5px;
+	speak: none; 
+	font-weight: normal; 
+	font-variant: normal; 
+	text-transform: none; 
+	line-height: 1; 
+	-webkit-font-smoothing: antialiased; 
+	-moz-osx-font-smoothing: grayscale;
+	
+}
+.widget_archive h3.widget-title:before {
+    content: "\e02f";
+}
+.widget_categories h3.widget-title:before {
+    content: "\e022";
+}
+.widget_recent_comments h3.widget-title:before {
+	content: "\77";
+}
+.widget_recent_entries h3.widget-title:before {
+    content: "\68";
+}
+.widget_calendar h3.widget-title:before {
+    content: "\e023";    
+}
+.widget_nav_menu h3.widget-title:before {
+    content:"\e02c";
+	
+}
+.widget_tag_cloud h3.widget-title:before {
+    content:"\e018";
+}
+.widget_search h3.widget-title:before {
+    content:"\55";
+}
+
+/*--------------------------------------------------------------
+10.2 Post format
+--------------------------------------------------------------*/
+.blog .format-aside .entry-title,
+.archive .format-aside .entry-title {
+	display: none;
+}
+.format-quote .entry-header h1:before,
+.format-video .entry-header h1:before,
+.format-image .entry-header h1:before,
+.format-link .entry-header h1:before,
+.sticky .entry-header h1:before {
+    font-family: 'ThemeIcons';
+    font-size: .8em;
+    padding: .2em .4em;
+    color: #fff;
+    background:#14bfcc;
+    border-radius: 4px;
+    float: right;
+}
+
+.format-quote .entry-header h1:before {
+	content:"\7c";
+}
+.format-video .entry-header h1:before {
+	content:"\e024";
+}
+.format-image .entry-header h1:before {
+	content:"\e005";
+}
+.format-link .entry-header h1:before {
+	content:"\e02b";
+}
+.sticky .entry-header h1:before {
+	content:"\e01e";
+}
+/*--------------------------------------------------------------
+SOCIAL ICON
+--------------------------------------------------------------*/
+.social-url  {
+	text-align:center;
+	width:100%;
+	display:block;
+	padding-top:0.5em;
+	padding-bottom:0.5em;
+}
+.social-url a {
+	text-align:center;
+	display:inline-block;
+	margin:5px 2px;
+	padding:10px 12px 6px 12px;
+}
+/*--------------------------------------------------------------
+Scroll to top
+--------------------------------------------------------------*/
+#smoothup { 
+    background: #14bfcc;
+    color: #fff;
+    padding: .3em .6em; 
+    position:fixed;
+    bottom:0px;
+    right:40px;
+    display:none;
+    -webkit-transition-duration: 0.8s; 
+    -moz-transition-duration: 0.8s; 
+    transition-duration: 0.8s;
+    z-index: 9999;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#smoothup:hover {
+}
+/*--------------------------------------------------------------
+Breadcrumb
+--------------------------------------------------------------*/
+.breadcrumb {
+    margin: 0 0 1em;
+    padding: 0;
+    font-size: .92em;
+    color: #777;
+}
+/*--------------------------------------------------------------
+Related post
+--------------------------------------------------------------*/
+.single .relatedposts .relatedthumb {
+    display:inline-table;
+    width: 30%;
+    margin:10px 15px 0px 0px;
+}
+/*--------------------------------------------------------------
+Author box
+--------------------------------------------------------------*/
+.author-box {
+	display:inline-block;
+    width: 100%;
+    clear:both;
+	margin-bottom:1em;
+ }
+ .author-box img.avatar {
+	float:left;
+	width:80px;
+	height:80px;
+	margin:10px 20px 10px 0px;
+	display:inline-block;
+
+ }
+ .author-box .description {
+	 width:80%;
+	 float:right;
+	 display:inline-block;
+ }
+ .author-box h3 {
+	 text-transform:capitalize;
+	 margin:0 0 10px 0 !important;
+ }
+/*--------------------------------------------------------------
+Slider
+--------------------------------------------------------------*/
+#image-slider {
+	 background:#fff;
+ }
+#image-slider .item{
+    border-left: 1px solid #eee;
+    border-bottom: 1px solid #ddd;
+ }
+#image-slider .carousel-caption {
+	 padding:1em;
+ }

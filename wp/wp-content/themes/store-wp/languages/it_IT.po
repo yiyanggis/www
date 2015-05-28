@@ -1,0 +1,1117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Store WP v1.09\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2015-03-16 14:53:10+0000\n"
+"Last-Translator: iografica <info@iograficathemes.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: CSL v1.x\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;\n"
+"X-Poedit-Basepath: ../\n"
+"X-Poedit-Bookmarks: \n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Textdomain-Support: yes"
+
+#: 404.php:15
+#@ store-wp
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Oops! La pagina non è stata trovata."
+
+#: comments.php:28
+#, php-format
+#@ store-wp
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Un commento a &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s commenti a &ldquo;%2$s&rdquo;"
+
+#: comments.php:35
+#: comments.php:52
+#@ store-wp
+msgid "Comment navigation"
+msgstr "Navigazione commento"
+
+#: comments.php:36
+#: comments.php:53
+#@ store-wp
+msgid "&larr; Older Comments"
+msgstr "&larr; Commenti precedenti"
+
+#: comments.php:37
+#: comments.php:54
+#@ store-wp
+msgid "Newer Comments &rarr;"
+msgstr "Commenti successivi &rarr;"
+
+#: comments.php:64
+#@ store-wp
+msgid "Comments are closed."
+msgstr "I commenti sono chiusi."
+
+#: content-none.php:13
+#@ store-wp
+msgid "Nothing Found"
+msgstr "Nessun risultato"
+
+#: content-none.php:19
+#, php-format
+#@ store-wp
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Pronto a pubblicare il tuo primo articolo? <a href=\"%1$s\">Inizia da qui</a>."
+
+#: content-none.php:23
+#@ store-wp
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Ci dispiace, ma nulla corrisponde ai termini della tua ricerca. Prova a cerca di nuovo con parole chiave differenti."
+
+#: content-none.php:28
+#@ store-wp
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Sembra che non siamo in grado di trovare ciò che stai cercando. Forse la ricerca può aiutare."
+
+#: content-page.php:21
+#: content-single.php:24
+#: content.php:32
+#@ store-wp
+msgid "Pages:"
+msgstr "Pagine:"
+
+#: content-page.php:28
+#: content-sitemap.php:42
+#: core-framework/template-tags.php:149
+#@ store-wp
+msgid "Edit"
+msgstr "Modifica"
+
+#: content-sitemap.php:20
+#@ store-wp
+msgid "Pages"
+msgstr "Pagine"
+
+#: content-sitemap.php:26
+#@ store-wp
+msgid "Posts"
+msgstr "Articoli"
+
+#: content-sitemap.php:32
+#@ store-wp
+msgid "Authors"
+msgstr "Autori"
+
+#: content-sitemap.php:36
+#@ store-wp
+msgid "Categories"
+msgstr "Categorie"
+
+#. translators: %s: Name of current post
+#: content.php:25
+#, php-format
+#@ store-wp
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Continua a leggere %s <span class=\"meta-nav\">&rarr;</span>"
+
+#: core-framework/extras.php:51
+#, php-format
+#@ store-wp
+msgid "Page %s"
+msgstr "Pagina %s"
+
+#: core-framework/func/function-action.php:72
+#@ store-wp
+msgid "Back to top"
+msgstr "Torna su"
+
+#: core-framework/func/function-action.php:72
+#@ store-wp
+msgid "TOP"
+msgstr ""
+
+#: core-framework/func/function-action.php:79
+#@ store-wp
+msgid "Proudly powered by "
+msgstr ""
+
+#: core-framework/func/function-action.php:79
+#@ store-wp
+msgid "http://wordpress.org/"
+msgstr ""
+
+#: core-framework/func/function-action.php:79
+#, php-format
+#@ store-wp
+msgid "%s"
+msgstr ""
+
+#: core-framework/func/function-action.php:81
+#, php-format
+#@ store-wp
+msgid "Theme: %1$s by %2$s."
+msgstr "Tema: %1$s realizzato da %2$s."
+
+#: core-framework/func/function-action.php:104
+#@ store-wp
+msgid "Home"
+msgstr ""
+
+#: core-framework/func/function-widget.php:7
+#@ store-wp
+msgid "Sidebar"
+msgstr ""
+
+#: core-framework/func/function-widget.php:18
+#@ store-wp
+msgid "First Footer Widget Area"
+msgstr "Prima area widget footer"
+
+#: core-framework/func/function-widget.php:20
+#@ store-wp
+msgid "The first footer widget area"
+msgstr "La prima area widget del footer"
+
+#: core-framework/func/function-widget.php:29
+#@ store-wp
+msgid "Second Footer Widget Area"
+msgstr "Seconda area widget footer"
+
+#: core-framework/func/function-widget.php:31
+#@ store-wp
+msgid "The second footer widget area"
+msgstr "La seconda area widget del footer"
+
+#: core-framework/func/function-widget.php:40
+#@ store-wp
+msgid "Third Footer Widget Area"
+msgstr "Terza area widget footer"
+
+#: core-framework/func/function-widget.php:42
+#@ store-wp
+msgid "The third footer widget area"
+msgstr "La terza area widget del footer"
+
+#: core-framework/func/function-widget.php:51
+#@ store-wp
+msgid "Fourth Footer Widget Area"
+msgstr "Quarta area widget footer"
+
+#: core-framework/func/function-widget.php:53
+#@ store-wp
+msgid "The fourth footer widget area"
+msgstr "La quarta area widget del footer"
+
+#: core-framework/func/function-widget.php:61
+#@ store-wp
+msgid "Sidebar shop"
+msgstr ""
+
+#: core-framework/options/includes/class-options-framework-admin.php:54
+#: core-framework/options/includes/class-options-framework-admin.php:55
+#@ store-wp
+msgid "Theme Options"
+msgstr "Opzioni Tema"
+
+#: core-framework/options/includes/class-options-framework-admin.php:134
+#@ store-wp
+msgid "Save Options"
+msgstr "Salva Opzioni"
+
+#: core-framework/options/includes/class-options-framework-admin.php:135
+#@ store-wp
+msgid "Restore Defaults"
+msgstr "Ripristina Default"
+
+#: core-framework/options/includes/class-options-framework-admin.php:135
+#@ store-wp
+msgid "Click OK to reset. Any theme settings will be lost!"
+msgstr "Clicca OK per ripristinare. Tutte le impostazione del tema saranno perse!"
+
+#: core-framework/options/includes/class-options-framework-admin.php:166
+#@ store-wp
+msgid "Default options restored."
+msgstr "Opzioni ripristinate a default."
+
+#: core-framework/options/includes/class-options-framework-admin.php:220
+#@ store-wp
+msgid "Options saved."
+msgstr "Opzioni salvate."
+
+#: core-framework/options/includes/class-options-media-uploader.php:57
+#@ store-wp
+msgid "No file chosen"
+msgstr "Nessun file scelto"
+
+#: core-framework/options/includes/class-options-media-uploader.php:60
+#: core-framework/options/includes/class-options-media-uploader.php:113
+#@ store-wp
+msgid "Upload"
+msgstr "Carica"
+
+#: core-framework/options/includes/class-options-media-uploader.php:62
+#: core-framework/options/includes/class-options-media-uploader.php:114
+#@ store-wp
+msgid "Remove"
+msgstr "Rimuovi"
+
+#: core-framework/options/includes/class-options-media-uploader.php:65
+#@ store-wp
+msgid "Upgrade your version of WordPress for full media support."
+msgstr ""
+
+#: core-framework/options/includes/class-options-media-uploader.php:89
+#@ store-wp
+msgid "View File"
+msgstr "Vedi File"
+
+#: core-framework/options/includes/class-options-sanitization.php:312
+#@ store-wp
+msgid "No Repeat"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:313
+#@ store-wp
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:314
+#@ store-wp
+msgid "Repeat Vertically"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:315
+#@ store-wp
+msgid "Repeat All"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:327
+#@ store-wp
+msgid "Top Left"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:328
+#@ store-wp
+msgid "Top Center"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:329
+#@ store-wp
+msgid "Top Right"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:330
+#@ store-wp
+msgid "Middle Left"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:331
+#@ store-wp
+msgid "Middle Center"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:332
+#@ store-wp
+msgid "Middle Right"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:333
+#@ store-wp
+msgid "Bottom Left"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:334
+#@ store-wp
+msgid "Bottom Center"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:335
+#@ store-wp
+msgid "Bottom Right"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:347
+#@ store-wp
+msgid "Scroll Normally"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:348
+#@ store-wp
+msgid "Fixed in Place"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:420
+#@ store-wp
+msgid "Normal"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:421
+#@ store-wp
+msgid "Italic"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:422
+#@ store-wp
+msgid "Bold"
+msgstr ""
+
+#: core-framework/options/includes/class-options-sanitization.php:423
+#@ store-wp
+msgid "Bold Italic"
+msgstr ""
+
+#: core-framework/partials/page-metabox.php:3
+#@ store-wp
+msgid "Page Settings"
+msgstr "Impostazioni pagina"
+
+#: core-framework/partials/page-metabox.php:14
+#@ store-wp
+msgid "Page title"
+msgstr "Titolo pagina"
+
+#: core-framework/partials/page-metabox.php:18
+#@ store-wp
+msgid "Hide page title"
+msgstr "Nascondi il titolo di pagina"
+
+#: core-framework/template-tags.php:20
+#@ store-wp
+msgid "Posts navigation"
+msgstr ""
+
+#: core-framework/template-tags.php:24
+#@ store-wp
+msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
+msgstr "<span class=\"meta-nav\">&larr;</span> Articoli precedenti"
+
+#: core-framework/template-tags.php:28
+#@ store-wp
+msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
+msgstr "Articoli successivi <span class=\"meta-nav\">&rarr;</span>"
+
+#: core-framework/template-tags.php:56
+#@ store-wp
+msgid "&laquo; Previous"
+msgstr "&laquo; Precedente"
+
+#: core-framework/template-tags.php:57
+#@ store-wp
+msgid "Next &raquo;"
+msgstr "Successivo &raquo;"
+
+#: core-framework/template-tags.php:79
+#@ store-wp
+msgid "Post navigation"
+msgstr ""
+
+#: core-framework/template-tags.php:82
+#, php-format
+#@ store-wp
+msgctxt "Previous post link"
+msgid "<span class=\"meta-nav\">&larr;</span>&nbsp;%title"
+msgstr ""
+
+#: core-framework/template-tags.php:83
+#, php-format
+#@ store-wp
+msgctxt "Next post link"
+msgid "%title&nbsp;<span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: core-framework/template-tags.php:109
+#, php-format
+#@ store-wp
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "Pubblicato il %s"
+
+#: core-framework/template-tags.php:114
+#, php-format
+#@ store-wp
+msgctxt "post author"
+msgid "by %s"
+msgstr "da %s"
+
+#. translators: used between list items, there is a space after the comma 
+#: core-framework/template-tags.php:131
+#: core-framework/template-tags.php:137
+#@ store-wp
+msgid ", "
+msgstr ""
+
+#: core-framework/template-tags.php:133
+#: core-framework/template-tags.php:139
+#, php-format
+#@ store-wp
+msgid "%1$s"
+msgstr ""
+
+#: core-framework/template-tags.php:145
+#@ store-wp
+msgid "Leave a comment"
+msgstr "Lascia un commento"
+
+#: core-framework/template-tags.php:145
+#@ store-wp
+msgid "1 Comment"
+msgstr "1 Commento"
+
+#: core-framework/template-tags.php:145
+#@ store-wp
+msgid "% Comments"
+msgstr "% Commenti"
+
+#: core-framework/template-tags.php:166
+#, php-format
+#@ store-wp
+msgid "Category: %s"
+msgstr "Categoria: %s"
+
+#: core-framework/template-tags.php:168
+#, php-format
+#@ store-wp
+msgid "Tag: %s"
+msgstr ""
+
+#: core-framework/template-tags.php:170
+#, php-format
+#@ store-wp
+msgid "Author: %s"
+msgstr "Autore: %s"
+
+#: core-framework/template-tags.php:172
+#, php-format
+#@ store-wp
+msgid "Year: %s"
+msgstr "Anno: %s"
+
+#: core-framework/template-tags.php:172
+#@ store-wp
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr ""
+
+#: core-framework/template-tags.php:174
+#, php-format
+#@ store-wp
+msgid "Month: %s"
+msgstr "Mese: %s"
+
+#: core-framework/template-tags.php:174
+#@ store-wp
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr ""
+
+#: core-framework/template-tags.php:176
+#, php-format
+#@ store-wp
+msgid "Day: %s"
+msgstr "Giorno: %s"
+
+#: core-framework/template-tags.php:176
+#@ store-wp
+msgctxt "daily archives date format"
+msgid "F j, Y"
+msgstr ""
+
+#: core-framework/template-tags.php:179
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Asides"
+msgstr ""
+
+#: core-framework/template-tags.php:181
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Galleries"
+msgstr ""
+
+#: core-framework/template-tags.php:183
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Images"
+msgstr ""
+
+#: core-framework/template-tags.php:185
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Videos"
+msgstr ""
+
+#: core-framework/template-tags.php:187
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Quotes"
+msgstr ""
+
+#: core-framework/template-tags.php:189
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Links"
+msgstr ""
+
+#: core-framework/template-tags.php:191
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Statuses"
+msgstr ""
+
+#: core-framework/template-tags.php:193
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Audio"
+msgstr ""
+
+#: core-framework/template-tags.php:195
+#@ store-wp
+msgctxt "post format archive title"
+msgid "Chats"
+msgstr ""
+
+#: core-framework/template-tags.php:198
+#, php-format
+#@ store-wp
+msgid "Archives: %s"
+msgstr "Archivi: %s"
+
+#. translators: 1: Taxonomy singular name, 2: Current taxonomy term 
+#: core-framework/template-tags.php:202
+#, php-format
+#@ store-wp
+msgid "%1$s: %2$s"
+msgstr ""
+
+#: functions.php:42
+#@ store-wp
+msgid "Primary Menu"
+msgstr "Menu primario"
+
+#: functions.php:43
+#@ store-wp
+msgid "Header Menu"
+msgstr "Menu testata"
+
+#: functions.php:138
+#@ store-wp
+msgid "Account"
+msgstr "Profilo"
+
+#: functions.php:139
+#@ store-wp
+msgid "Cart"
+msgstr "Carrello"
+
+#: functions.php:140
+#@ store-wp
+msgid "Log out"
+msgstr ""
+
+#: functions.php:144
+#@ store-wp
+msgid "Log in"
+msgstr ""
+
+#: header.php:22
+#@ store-wp
+msgid "Skip to content"
+msgstr "Vai al contenuto"
+
+#: header.php:45
+#@ store-wp
+msgid "MENU"
+msgstr ""
+
+#: options.php:17
+#@ store-wp
+msgid "General"
+msgstr "Generale"
+
+#: options.php:22
+#@ store-wp
+msgid "Upload your favicon"
+msgstr "Carica la tua favicon"
+
+#: options.php:28
+#@ store-wp
+msgid "Upload your logo"
+msgstr "Carica il tuo logo"
+
+#: options.php:33
+#@ store-wp
+msgid "iPhone icon"
+msgstr ""
+
+#: options.php:34
+#@ store-wp
+msgid "Apple touch icon iphone (57x57 px)"
+msgstr ""
+
+#: options.php:39
+#@ store-wp
+msgid "iPad icon"
+msgstr ""
+
+#: options.php:40
+#@ store-wp
+msgid "Apple touch icon ipad (76x76 px)"
+msgstr ""
+
+#: options.php:45
+#@ store-wp
+msgid "iPhone retina icon"
+msgstr ""
+
+#: options.php:46
+#@ store-wp
+msgid "Apple touch icon iphone retina (120x120 px)"
+msgstr ""
+
+#: options.php:51
+#@ store-wp
+msgid "iPad retina icon"
+msgstr ""
+
+#: options.php:52
+#@ store-wp
+msgid "Apple touch icon ipad retina (152x152 px)"
+msgstr ""
+
+#: options.php:57
+#@ store-wp
+msgid "Windows 8 pinned image"
+msgstr ""
+
+#: options.php:58
+#@ store-wp
+msgid "Pinned site Windows 8 (144x144 px)"
+msgstr ""
+
+#: options.php:63
+#@ store-wp
+msgid "Windows 8 pinned image color"
+msgstr ""
+
+#: options.php:64
+#@ store-wp
+msgid "Pinned site Windows 8 color"
+msgstr ""
+
+#: options.php:69
+#@ store-wp
+msgid "Lightbox"
+msgstr ""
+
+#: options.php:77
+#@ store-wp
+msgid "Shortcodes"
+msgstr ""
+
+#: options.php:82
+#@ store-wp
+msgid "Breadcrumb"
+msgstr ""
+
+#: options.php:90
+#@ store-wp
+msgid "Style"
+msgstr "Stile"
+
+#: options.php:94
+#@ store-wp
+msgid "Header styling"
+msgstr "Stile header"
+
+#: options.php:99
+#@ store-wp
+msgid "Header menu styling"
+msgstr "Stile menu header"
+
+#: options.php:104
+#@ store-wp
+msgid "Menu styling"
+msgstr "Stile menu"
+
+#: options.php:109
+#@ store-wp
+msgid "Link styling"
+msgstr "Stile link"
+
+#: options.php:114
+#@ store-wp
+msgid "Button styling"
+msgstr "Stile pulsanti"
+
+#: options.php:119
+#@ store-wp
+msgid "Footer styling"
+msgstr "Stile footer"
+
+#: options.php:123
+#@ store-wp
+msgid "Layout"
+msgstr ""
+
+#: options.php:127
+#@ store-wp
+msgid "Main layout"
+msgstr "Layout principale"
+
+#: options.php:128
+#@ store-wp
+msgid "Select the index page layout"
+msgstr "Seleziona il layout delle pagine index"
+
+#: options.php:132
+#@ store-wp
+msgid "Main featured images"
+msgstr "Immagini in evidenza principali"
+
+#: options.php:140
+#@ store-wp
+msgid "Numeric Pagination"
+msgstr "Paginazione numerica"
+
+#: options.php:148
+#@ store-wp
+msgid "Post layout"
+msgstr "Layout articoli"
+
+#: options.php:149
+#@ store-wp
+msgid "Select the single post layout"
+msgstr "Seleziona il layout dei singoli articoli"
+
+#: options.php:153
+#@ store-wp
+msgid "Post featured image"
+msgstr "Immagine in evidenza articolo"
+
+#: options.php:154
+#@ store-wp
+msgid "Show featured images in posts"
+msgstr "Mostra l'immagine in evidenza nell'articolo"
+
+#: options.php:160
+#@ store-wp
+msgid "Post meta data"
+msgstr "Meta dati articolo"
+
+#: options.php:161
+#@ store-wp
+msgid "Hide post meta data"
+msgstr "Nascondi i meta dati dell'articolo"
+
+#: options.php:166
+#@ store-wp
+msgid "Shop Layout"
+msgstr "Layout negozio"
+
+#: options.php:167
+#@ store-wp
+msgid "Select shop page layout"
+msgstr "Seleziona il layout del negozio"
+
+#: options.php:171
+#@ store-wp
+msgid "Shop Slide"
+msgstr "Slide negozio"
+
+#: options.php:172
+#@ store-wp
+msgid "Show product slides"
+msgstr "Mostra la slide dei prodotti"
+
+#: options.php:177
+#@ store-wp
+msgid "Footer"
+msgstr ""
+
+#: options.php:181
+#@ store-wp
+msgid "Footer text"
+msgstr "Testo footer"
+
+#: options.php:182
+#@ store-wp
+msgid "Footer custom text"
+msgstr "Testo personalizzato per il footer"
+
+#: options.php:186
+#@ store-wp
+msgid "Credits link"
+msgstr ""
+
+#: options.php:187
+#@ store-wp
+msgid "Remove author credits"
+msgstr "Rimuovi i ringraziamenti all'autore"
+
+#: options.php:190
+#@ store-wp
+msgid "Social"
+msgstr ""
+
+#: options.php:194
+#@ store-wp
+msgid "Facebook url"
+msgstr ""
+
+#: options.php:195
+#@ store-wp
+msgid "Add the url of your Facebook page"
+msgstr "Scrivi la url della tua pagina Facebook"
+
+#: options.php:201
+#@ store-wp
+msgid "Twitter url"
+msgstr ""
+
+#: options.php:202
+#@ store-wp
+msgid "Add the url of your Twitter page"
+msgstr "Scrivi la url della tua pagina Twitter"
+
+#: options.php:208
+#@ store-wp
+msgid "Google plus url"
+msgstr ""
+
+#: options.php:209
+#@ store-wp
+msgid "Add the url of your Google Plus page"
+msgstr "Scrivi la url della tua pagina Google Plus"
+
+#: options.php:215
+#@ store-wp
+msgid "Pinterest url"
+msgstr ""
+
+#: options.php:216
+#@ store-wp
+msgid "Add the url of your Pinterest page"
+msgstr "Scrivi la url della tua pagina Pinterest"
+
+#: options.php:222
+#@ store-wp
+msgid "Tumblr url"
+msgstr ""
+
+#: options.php:223
+#@ store-wp
+msgid "Add the url of your Tumblr page"
+msgstr "Scrivi la url della tua pagina Tumblr"
+
+#: options.php:229
+#@ store-wp
+msgid "Instagram url"
+msgstr ""
+
+#: options.php:230
+#@ store-wp
+msgid "Add the url of your Instagram page"
+msgstr "Scrivi la url della tua pagina Instagram"
+
+#: options.php:236
+#@ store-wp
+msgid "Linkedin url"
+msgstr ""
+
+#: options.php:237
+#@ store-wp
+msgid "Add the url of your Linkedin page"
+msgstr "Scrivi la url della tua pagina Linkedin"
+
+#: options.php:243
+#@ store-wp
+msgid "Dribbble url"
+msgstr ""
+
+#: options.php:244
+#@ store-wp
+msgid "Add the url of your Dribbble page"
+msgstr "Scrivi la url della tua pagina Dribbble"
+
+#: options.php:250
+#@ store-wp
+msgid "Vimeo url"
+msgstr ""
+
+#: options.php:251
+#@ store-wp
+msgid "Add the url of your Vimeo page"
+msgstr "Scrivi la url della tua pagina Vimeo"
+
+#: options.php:257
+#@ store-wp
+msgid "Youtube url"
+msgstr ""
+
+#: options.php:258
+#@ store-wp
+msgid "Add the url of your Youtube page"
+msgstr "Scrivi la url della tua pagina Youtube"
+
+#: options.php:264
+#@ store-wp
+msgid "RSS url"
+msgstr ""
+
+#: options.php:265
+#@ store-wp
+msgid "Add the url of your RSS"
+msgstr "Scrivi la url dei tuoi RSS"
+
+#: options.php:270
+#@ store-wp
+msgid "Advanced"
+msgstr "Avanzate"
+
+#: options.php:274
+#@ store-wp
+msgid "Custom css"
+msgstr "CSS personalizzato"
+
+#: options.php:275
+#@ store-wp
+msgid "Add your custom css code"
+msgstr "Aggiungi il tuo codice CSS personalizzato"
+
+#: options.php:279
+#@ store-wp
+msgid "Custom javascript"
+msgstr "Javascript personalizzato"
+
+#: options.php:280
+#@ store-wp
+msgid "Add your custom js code"
+msgstr "Aggiungi codice js personalizzato"
+
+#: options.php:304
+#@ store-wp
+msgid "Logo and favicon"
+msgstr "Logo e favicon"
+
+#: options.php:341
+#@ store-wp
+msgid "Store WP Premium"
+msgstr ""
+
+#: options.php:345
+#@ store-wp
+msgid "If you like this theme, considering supporting development by purchasing the premium version."
+msgstr "Se ti piace il tema, considera di supportare il suo sviluppo comprando la versione premium."
+
+#: options.php:346
+#@ store-wp
+msgid "MAIN PREMIUM FEATURES"
+msgstr "CARATTERISTICHE PRINCIPALI PREMIUM"
+
+#: options.php:347
+#@ store-wp
+msgid "All options enabled"
+msgstr "Tutte le opzioni abilitate"
+
+#: options.php:349
+#@ store-wp
+msgid "Priority support"
+msgstr "Supporto prioritario"
+
+#: options.php:350
+#@ store-wp
+msgid "Money back guarantee"
+msgstr "Garanzia di rimborso"
+
+#: search.php:16
+#, php-format
+#@ store-wp
+msgid "Search Results for: %s"
+msgstr "Risultati di ricerca per: %s"
+
+#: options.php:15
+#@ store-wp
+msgid " - only premium"
+msgstr " - solo premium"
+
+#: options.php:348
+#@ store-wp
+msgid "Premium shortcodes included"
+msgstr "Shortcode premium inclusi"
+
+#: options.php:351
+#@ store-wp
+msgid "upgrade to premium"
+msgstr "aggiorna alla versione premium"
+
+#: options.php:21
+#@ store-wp
+msgid "Favicon"
+msgstr ""
+
+#: options.php:27
+#@ store-wp
+msgid "Logo"
+msgstr ""
+
+#: options.php:70
+#@ store-wp
+msgid "Enable image lightbox"
+msgstr ""
+
+#: options.php:78
+#@ store-wp
+msgid "Enable shortcodes"
+msgstr ""
+
+#: options.php:83
+#@ store-wp
+msgid "Enable breadcrumb"
+msgstr ""
+
+#: options.php:95
+#@ store-wp
+msgid "Header background color"
+msgstr ""
+
+#: options.php:100
+#: options.php:105
+#@ store-wp
+msgid "Custom menu colors"
+msgstr ""
+
+#: options.php:110
+#@ store-wp
+msgid "Custom links color"
+msgstr ""
+
+#: options.php:115
+#@ store-wp
+msgid "Custom button style"
+msgstr ""
+
+#: options.php:120
+#@ store-wp
+msgid "Custom background, headings, text and links color"
+msgstr ""
+
+#: options.php:133
+#@ store-wp
+msgid "Show featured images in index pages"
+msgstr ""
+
+#: options.php:141
+#@ store-wp
+msgid "Numeric pagination in index pages"
+msgstr ""
+
+#: 404.php:19
+#@ store-wp
+msgid "It looks like nothing was found at this location."
+msgstr "Sembra che nulla è stato trovato in questa posizione."
+

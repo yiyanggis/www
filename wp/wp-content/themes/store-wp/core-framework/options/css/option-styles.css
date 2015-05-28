@@ -1,0 +1,60 @@
+/*
+ * Styling for the options panel
+ */
+#optionsframework-metabox {
+    margin-right:300px;
+}
+#optionsframework {
+    float:left;
+    width:100%;
+}
+#optionsframework-sidebar {
+    float: left;
+    margin-left:18px;
+    width: 280px;
+}
+#optionsframework-sidebar .metabox-holder {
+    padding-top:0;
+}
+#optionsframework-sidebar h3 {
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ddd;
+}
+#optionsframework-sidebar .upgrade-button {
+    margin-top:5px;
+    display: inline-block;
+    background: #4aa55b;
+    border: 1px solid #48964f;
+    border-radius: 3px;
+    color:#fff;
+    padding: 6px 12px;
+    text-decoration: none;
+    text-transform: uppercase;
+    text-shadow: 1px 0px 3px #376937;
+    cursor: pointer;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+#optionsframework-sidebar .upgrade-button:hover {
+    display: inline-block;
+    background:#48964f;
+}
+#optionsframework .upgrade-tag {
+    color:#4aa55b;
+    text-decoration: none;
+}
+#optionsframework .upgrade-tag:hover {
+    color:#48964f;
+}
+@media screen and (max-width: 782px) {
+    #optionsframework-metabox {
+        margin-right: 0;
+    }
+    #optionsframework-sidebar {
+        clear:both;
+        float: none;
+        width: auto;
+        margin: 20px 0 0 0;
+    }
+}

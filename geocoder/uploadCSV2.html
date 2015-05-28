@@ -198,33 +198,39 @@ $(document).ready(function(){
 		$("#progressbar").attr("style","width:0%");
 		if(csvData!==undefined){
 			$.each(csvData,function(index,value){
-				if(index==0){
-					return true;
-				}
+				
+				//if(index==0){
+				//	return true;
+				//}
 
 				//current=index;
 				//console.log(index+","+value[addressField]);
 				var address=value[addressField]+","+value[cityField]+","+value[stateField]+","+value[zipField];
 				console.log(address);
+
+				setTimeout(function(){}, 200);
+
               $.ajax({
-                //url:"https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false&key=AIzaSyCp1HWib0Es6rZGsfylHOZMawOiOZYx3Q4",
-                url:"http://nominatim.openstreetmap.org/search/"+address+"?format=json&addressdetails=1&limit=1&polygon_geojson=1"
-                //,async:false
+                url:"https://maps.googleapis.com/maps/api/geocode/json?address="+address+"&sensor=false&key=AIzaSyCp1HWib0Es6rZGsfylHOZMawOiOZYx3Q4"
+                //url:"http://nominatim.openstreetmap.org/search/"+address+"?format=json&addressdetails=1&limit=1&polygon_geojson=1"
+                ,async:false
               }).done(function(d){
 
               	current+=1;
 
                 console.log(d);
-                if(d.length!=0){
+
+                //openstreetmap
+                /*if(d.length!=0){
 					value.X=d[0].lon;
 	                value.Y=d[0].lat;
 
 	                rate=current*100.0/total;
 	                $("#progressbar").attr("style","width:"+rate+"%");
 	                $("#progressbarText").text(current+"/"+total);
-                }
+                }*/
                 
-                /*if(d.status=="OK")//ZERO_RESULTS
+                if(d.status=="OK")//ZERO_RESULTS
                 {
                   console.log(d);
                   value.X=d.results[0].geometry.location.lng;
@@ -232,7 +238,9 @@ $(document).ready(function(){
                   rate=current*100.0/total;
                   $("#progressbar").attr("style","width:"+rate+"%");
                   $("#progressbarText").text(current+"/"+total);
-                }*/
+                }
+
+
 
 
               });
