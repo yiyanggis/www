@@ -65,6 +65,8 @@ var btnStatus;
 
 var ptStart,ptEnd;
 
+var circle,cityCircle;
+
   $(document).ready(function(){
     map = new google.maps.Map(document.getElementById('map-canvas'), {
       zoom: 4,
@@ -122,24 +124,82 @@ var ptStart,ptEnd;
 
         var dis=YY.GoogleDistance.getDistance(ptStart,ptEnd);
         alert(dis*0.000621371192);
+
+        
+      }
+      else if(btnStatus=="circle"){
+        if(markerStart!=null){
+          markerStart.setMap(null);
+          markerStart=null;
+        }
+
+        markerStart = new google.maps.Marker({
+          position: event.latLng,
+          map: map,
+          title: 'location'
+          });
+
+        //var radPt=YY.RadPt(event.latLng);
+        //radPt.print();
+
+        //ptEnd=new YY.Point(event.latLng.lng(),event.latLng.lat());
+        circle=new YY.Circle(event.latLng.lng(),event.latLng.lat(),10000,map);
+        //console.log(ptEnd.toString());
+
+        cityCircle = new google.maps.Circle(circle.generateOptions());
+
+        var populationOptions = {
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35,
+          map: map,
+          center: event.latLng,
+          radius: 100000
+        };
+        // Add the circle for this city to the map.
+        //cityCircle = new google.maps.Circle(populationOptions);
       }
       
 
     });
 
     $("#startBtn").click(function(){
-      if(btnStatus!="start")
+
+      if(btnStatus!="start"){
+        markerStart=null;
         btnStatus="start";
+        $(this).parent().addClass("active");
+      }
       else{
         btnStatus=null;
+        $(this).parent().removeClass("active");
       }
     });
 
     $("#endBtn").click(function(){
-      if(btnStatus!="end")
+
+      if(btnStatus!="end"){
+        marketEnd=null;
         btnStatus="end";
+        $(this).parent().addClass("active");
+      }
       else{
         btnStatus=null;
+        $(this).parent().removeClass("active");
+      }
+    });
+
+    $("#circleBtn").click(function(){
+      if(btnStatus!="circle"){
+        markerStart=null;
+        btnStatus="circle";
+        $(this).parent().addClass("active");
+      }
+      else{
+        btnStatus=null;
+        $(this).parent().removeClass("active");
       }
     });
 
@@ -167,8 +227,8 @@ var ptStart,ptEnd;
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Link</a></li>
+              <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
+              <li><a id="circleBtn" href="#">Circle</a></li>
               <li><a id="startBtn" href="#">Start</a></li>
               <li><a id="endBtn" href="#">End</a></li>
               <li class="dropdown">

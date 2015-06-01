@@ -148,6 +148,41 @@ YY.RadPt=YY.Class(YY.Point,{
 // 	return new YY.RadPt(x, y, round);
 // };
 
+YY.Circle=YY.Class({
+	x:null,
+	y:null,
+	radius:null,
+	center:null,
+	map:null,
+	initialize:function(x,y,radius,map){
+		this.x=x;
+		this.y=y;
+		this.radius=radius;
+		this.map=map;
+	},
+	toString: function(){
+		return this.x+"::"+this.y;
+	},
+	print:function(){
+		console.log(this.x+","+this.y);
+	},
+	options:{
+	  strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
+      map: this.map,
+      center: this.center,
+      radius: this.radius
+	},
+	generateOptions:function(){
+		this.options.center=new google.maps.LatLng(this.y,this.x);
+		this.options.map=this.map;
+		this.options.radius=this.radius;
+		return this.options;
+	}
+});
 
 YY.GoogleDistance=YY.Class({
 	initialize:function(map){
