@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Data Layer: Styling</title>
+    <title>Survey Questionnaire</title>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <style>
@@ -206,9 +206,23 @@ $(function() {
     $.each(csvData,function(index,value){
 
       if(value["Country Name"]==countryName){
-        var title="<a href='"+value.links+"' >"+value.Title+"</a>";
-        var questionnaire="<a href='"+value.questionnaire+"' >Questionnaire</a>";
-        var report="<a href='"+value.report+"' >Report</a>";
+        if(value.questionnaire.indexOf("http")>-1){
+          var questionnaire="<a href='"+value.questionnaire+"'  target='_blank'>Questionnaire</a>";
+        }
+        else{
+          var questionnaire="<a>No Questionnaire Available</a>";
+        }
+
+        if(value.report.indexOf("http")>-1){
+          var report="<a href='"+value.report+"' target='_blank'>Report</a>";
+        }
+        else{
+          var report="<a >No Report Available</a>";
+        }
+
+        var title="<a href='"+value.links+"' target='_blank'>"+value.Title+"</a>";
+        
+        //var report="<a href='"+value.report+"' >Report</a>";
         t.row.add([title,questionnaire,report]).draw();
       }
       
