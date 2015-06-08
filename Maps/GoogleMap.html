@@ -1,0 +1,434 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<title>Flickr Photo Search</title>
+<link href="Content/Site.css" rel="stylesheet" type="text/css" />
+<style>
+h2.label{
+        font:12px;
+        font-stretch: expanded;
+        font-weight: 1000;
+        color: blue;
+        text-align: center;
+        background-color:null;
+      }
+</style>
+
+<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+<script src="Scripts/jquery.corner.js" type="text/javascript"></script>
+<script src="Scripts/jquery.tmpl.min.js" type="text/javascript"></script>
+<script id="article-template" type="text/x-jquery-tmpl">
+  {{each articles}}
+  <tr style='background: ${$item.colors[$index%2]};'>
+    <td width='11%'><span class='labelname'>&nbsp;&nbsp;${$index}&nbsp;</span>&nbsp;&nbsp;<img src='images/icon.png' width='8' /></td>
+    <td width='34%'><span class='labelname'><a href='${WikipediaUrl}' target='_blank'>${Title}</a></span></td>
+    <td width='33%'><span class='labelname'> ${Feature} </span></td>
+    <td width='22%'><span class='labelname'> ${Distance} km</span></td></tr>
+  {{/each}}
+</script>
+
+<script src="Scripts/UI/jquery-ui-1.8.4.min.js" type="text/javascript" ></script>
+<script src="Scripts/jquery.dateFormat-1.0.js" type="text/javascript"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0T1H9WjiGnGFWmV0VQrwThUWJKku1OEQ&sensor=false"></script>
+<script src="dummydata.js" type="text/javascript"></script>
+<script src="Scripts/keydragzoom.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var markersArray = [];
+	var markersOverArray = [];
+	var markersRecArray = [];
+    $(function () {
+        var articleTemplate = $('#article-template').template();
+		$('.cornerDiv').corner();
+		$('.handel').click(function(){
+			$('#crosshair').hide();
+			clearOverlays();
+			clearRectangle();
+			$('.cont').hide();
+			$('#cont'+$(this).attr('id')).slideDown('slow');
+			if($(this).attr('id')== 2){
+				$('#crosshair').show();
+				if($('#display_on').is(':checked')){
+						createCircleInCenter();
+					if($('#seachType').val()=='Radius'){
+						bindListner();
+					}
+				}
+			}
+			$('#tab_index').val($(this).attr('id'));
+			$('#closeImg').show();
+		});
+
+        $('#wikipedialookup').click(function () {
+            var wikipediaSearch = {};
+            //var article;
+
+            wikipediaSearch.Radius = $("#WikipediaSearch_Radius").val();
+            wikipediaSearch.Latitude = $("#WikipediaSearch_Latitude").val();
+            wikipediaSearch.Longitude = $("#WikipediaSearch_Longitude").val();
+
+            $("#wikiResults").html('');
+
+            //$.post("/Map/FindNearbyWikipedia/", wikipediaSearch, updateWikipedialookup, "json");
+            var data = $.parseJSON(findNearbyWikipedia);
+	    var articleData = '<tr style="background:#909090;" height="20"><td width="11%">&nbsp;</td><td width="34%">Title</td><td width="33%" align="left">Feature</td><td width="22%">Km to center</td></tr>';
+	    $("#wikiResults").html(articleData);
+            $.tmpl(articleTemplate,
+                   {articles: data},
+                   {colors: ['#E4E4E4','#D6D6D6']}).appendTo('#wikiResults');
+        });
+
+		$('#WikipediaSearch_Radius').change(function(){
+			if($('#display_on').is(':checked')){
+				createCircleInCenter();
+			}
+		});
+
+		$('#display_on').click(function(){
+			createCircleInCenter();
+		});
+
+		//*Circle display off*//
+		$('#display_off').click(function(){
+			clearOverlays();
+		});
+
+		/*Change search type*/
+		$('#seachType').change(function(){
+			if($('#seachType').val()=='Radius'){
+					bindListner();
+			}
+			if($('#seachType').val()=='Bounding_Box'){
+				$('#BoundingBoxSearch').show();
+				$('#RadiusSearch').hide();
+				clearOverlays();
+				$('#crosshair').hide();
+				// Plot two markers to represent the Rectangle's bounds.
+       				var getCenterLatLng = map.getCenter();
+					var swlat = $('#SouthWest_Latitude').val();
+					var swlng =$('#SouthWest_Longitude').val();
+
+					var nelat = $('#NorthEast_Latitude').val();
+					var nelng = $('#NorthEast_Longitude').val();
+
+
+					marker1 = new google.maps.Marker({
+					  map: map,
+					  position: new google.maps.LatLng(swlat,swlng),
+					  draggable: true,
+					  title: 'Drag me!'
+					});
+					markersOverArray.push(marker1);
+					marker2 = new google.maps.Marker({
+					  map: map,
+					  position: new google.maps.LatLng(nelat,nelng),
+					  draggable: true,
+					  title: 'Drag me!'
+					});
+					markersOverArray.push(marker2);
+
+					 swpnt = new google.maps.LatLng(swlat, swlng);
+					 nepnt = new google.maps.LatLng(nelat, nelng);
+
+					var latlngbounds = new google.maps.LatLngBounds(swpnt,nepnt);
+					map.setCenter(latlngbounds.getCenter());
+
+					rectangle = new google.maps.Rectangle({
+					  map: map
+					});
+					redraw();
+					if($('#cleared_circle').val()!=0){
+						google.maps.event.addListener(marker1, 'drag', redraw);
+						google.maps.event.addListener(marker2, 'drag', redraw);
+					}
+
+					
+
+					// Create a new Rectangle overlay and place it on the map.  Size
+					// will be determined by the LatLngBounds based on the two Marker
+					// positions.
+
+			}
+		});
+		$('#wikipediaclearup').click(function () {
+				$("#wikiResults").html('');
+
+			});
+       updateWikipedialookup = function (data) {
+
+
+            $.each(data, function (article) {
+                //                   console.log('Language:' + this.Language);
+                //                   console.log('Title:' + this.Title);
+                //                   console.log('Summary:' + this.Summary);
+                //                   console.log('Feature:' + this.Feature);
+                //                   console.log('CountryCode:' + this.CountryCode);
+                //                   console.log('WikipediaUrl:' + this.WikipediaUrl);
+                //                   console.log('ThumbnailImg:' + this.ThumbnailImg);
+                //                   console.log('Latitude:' + this.Latitude);
+                //                   console.log('Longitude:' + this.Longitude);
+                //                   console.log('Distance:' + this.Distance);
+
+
+                article += "<div><span class='labelname'>Title</span> " + this.Title + "</div>";
+                article += "<div><span class='labelname'>Feature</span> " + this.Feature + "</div>";
+                article += "<div><span class='labelname'>Lat/Lon</span> " + this.Latitude + " " + this.Longitude + "</div>";
+                article += "<div><span class='labelname'>Distance</span> " + this.Distance + "</div>";
+                article += "<div><span class='labelname'>WikipediaUrl</span> " + this.WikipediaUrl + "</div>";
+                article += "<div><span class='labelname'>ThumbnailImg</span> " + this.ThumbnailImg + "</div>";
+                article += "<div><span class='labelname'>Summary</span></div><div>" + this.Summary + "</div>";
+                article += "<hr>";
+                $("#wikiResults").append(article);
+            });
+
+
+        };
+    });
+
+	function bindListner()
+	{
+		clearRectanOverlays();
+		clearRectangle();
+		$('#BoundingBoxSearch').hide();
+		$('#RadiusSearch').show();
+		if($('#display_on').is(':checked')){
+			createCircleInCenter();
+		}
+		$('#crosshair').show();
+
+	}
+	/* Create circle */
+	function createCircleInCenter()
+	{
+	var mapCenter = map.getCenter();
+
+	if($('#hidden_radius').val()!=0)
+		clearOverlays();
+		var circle = new google.maps.Circle({
+		 center : mapCenter,
+		 map: map,
+		 radius: parseInt($("#WikipediaSearch_Radius").val()),// // 3000 km
+		 fillColor: '#333333',
+		 fillOpacity : 0.4
+	});
+		markersArray.push(circle);
+		$('#hidden_radius').val(1);
+		$('#cleared_circle').val(0);
+	}
+
+	function closeDiv()
+	{
+		clearOverlays();
+		$('#crosshair').hide();
+		$('.cont').slideUp();
+		$('#closeImg').hide();
+	}
+
+	function clearOverlays() {
+		 if (markersArray) {
+			for (i in markersArray) {
+				 markersArray[i].setMap(null);
+			}
+		 }
+		 $('#cleared_circle').val(1);
+	}
+
+	function clearRectanOverlays() {
+		 if (markersRecArray) {
+			for (i in markersRecArray) {
+				 markersRecArray[i].setMap(null);
+			}
+		 }
+		 $('#cleared_rect').val(1);
+	}
+
+	function clearRectangle(){
+		 if (markersOverArray) {
+			for (i in markersOverArray) {
+				 markersOverArray[i].setMap(null);
+			}
+		 }
+	}
+    </script>
+<script src="Scripts/Maps/MapPreview.js" type="text/javascript"></script>
+<script src="Scripts/Maps/markerwithlabel.js" type="text/javascript"></script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /></head>
+<body>
+
+<div style="height:auto; margin:20px auto;width:1000px;">
+       <div style="background:#eaeaea; height:28px; padding:5px 10px 0;border-bottom:#DEDEDE solid 1px;" id="toolsHeaderDiv">
+          <span class="labelname">Map Tools:</span>
+		  <a href="javascript:void(0)" class="handel" id="1">Add Markers</a>|
+		  <a href="javascript:void(0)" class="handel" id="2">Wikipedia</a>|
+		  <a href="javascript:void(0)" class="handel" id="3">Monuments</a>|
+		 <a href="javascript:void(0)" class="handel" id="4">Overlays</a>
+		 <div style="float:right;">&nbsp;</div>
+		</div>
+       <div style="border:1px solid #DEDEDE;width:998px;">
+
+	   		<input type="hidden" name="tab_index" id="tab_index" value="0"/>
+
+			<div style="padding:5px; display:none;" class="cont" id="cont1">
+				<div>
+				  <div style="float:left;">
+				      <div style="margin-top:5px;margin-bottom:7px">
+					    <span class="labelname">Marker Name:</span>
+					    <input id="Marker_Name" width="250px;" name="Marker_Name" type="text" />
+                      </div>
+				     <div>
+				       <span class="labelvalue">Latitude:</span>
+				       <input id="Marker_Latitude" name="Marker_Latitude" type="text" />
+				       <span class="labelvalue">Longitude</span>
+				       <input id="Marker_Longitude" name="Marker_Longitude" type="text" />
+                     </div>
+				  </div>
+				  <div style="float:left;">
+				     <span class="labelname">Marker Type:</span>
+				     <input type="radio" name="markertype" id="marker_monument" checked="checked" />Monument
+					<input type="radio"  name="markertype" id="marker_xxx" />Off
+				  </div>
+				  <div style="float:right;"><a href="javascript:void(0);" onclick="javascript:closeDiv();" style="color:#FF0000; font-weight:bold; text-decoration:none;">X</a></div>
+				</div>
+				<div style="clear:both;"></div>
+			</div>
+
+			<div style="padding:5px;display:none;" class="cont" id="cont2">
+            	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td width="41%" align="left" valign="top">
+						<div>
+						  <div style="margin-top:5px;margin-bottom:7px;">
+						   <span class="labelname">Wikipedia Article Search</span>
+						  </div>
+						  <div style="margin-top:5px;margin-bottom:10px;">
+						   <span class="labelvalue">Search Type:</span>
+							<select name="seachType" class='boxformwh' id="seachType">
+								<option value="Radius" selected="selected">Radius</option>
+								<option value="Bounding_Box">Bounding Box</option>
+							</select>
+						  </div>
+
+
+						<div id="RadiusSearch">
+						  <div>
+							<span style="margin-right:5px;" class="labelvalue">Latitude</span>
+							<input id="WikipediaSearch_Latitude" name="WikipediaSearch.Latitude" type="text"  />
+							<span style="margin-right: 5px;" class="labelvalue">Longitude</span>
+							<input id="WikipediaSearch_Longitude" name="WikipediaSearch.Longitude" type="text"  />
+						  </div>
+						  <div style="margin-top:5px;">
+							<span style="margin-right:5px;" class="labelvalue">Radius</span>
+							<select id="WikipediaSearch_Radius" class='boxformwh' name="WikipediaSearch.Radius">
+							  <option value="500"selected="selected">500m</option>
+							  <option value="1000">1Km</option>
+							  <option value="2000">2Km</option>
+							  <option value="5000" >5Km</option>
+							  <option value="10000">10Km</option>
+							</select>
+							<span style="margin-right:2px;margin-left:15px;">Display Circle:</span>
+							  <input type="radio" name="display_circle" id="display_on" checked="checked" />On
+							  <input type="radio"  name="display_circle" id="display_off" />Off
+						  </div>
+						</div>
+
+						<div id="BoundingBoxSearch" style="display:none;">
+							<div style="margin-bottom:3px;"><span class="labelname">South West</span></div>
+							<div>
+								<span style="margin-right: 5px;" class="labelvalue">Latitude</span>
+								<input id="SouthWest_Latitude" name="SouthWest_Latitude" type="text" />
+								<span style="margin-right: 5px;" class="labelvalue">Longitude</span>
+								<input id="SouthWest_Longitude" name="SouthWest_Longitude" type="text" />
+							</div>
+							<div style="margin-top:3px;margin-bottom:3px;"><span class="labelname">North East</span></div>
+							<div>
+								<span style="margin-right: 5px;" class="labelvalue">Latitude</span>
+								<input id="NorthEast_Latitude" name="NorthEast_Latitude" type="text" />
+								<span style="margin-right: 5px;" class="labelvalue">Longitude</span>
+								<input id="NorthEast_Longitude" name="NorthEast_Longitude" type="text" />
+							</div>
+						</div>
+
+
+						<div style="margin-top:10px;margin-bottom:10px;">
+							<span style="margin-left:5px;">
+							  <input type="submit" value="Wikipedia Lookup" id="wikipedialookup" name="wikipedialookup" />
+							</span>
+							<span style="margin-left:5px;">
+							  <input type="submit" value="Clear" id="wikipediaclearup" name="wikipediaclearup" />
+							</span>
+						</div>
+
+					</div>
+					</td>
+					<td width="56%" align="left" valign="top">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" id="wikiResults">
+						</table>
+					</td>
+					<td width="3%" align="left" valign="top">&nbsp;&nbsp;<a href="javascript:void(0);" onclick="javascript:closeDiv();" style="color:#FF0000; font-weight:bold; text-decoration:none;">X</a></td>
+				  </tr>
+			  </table>
+            </div>
+
+			<div style="padding:5px;display:none;" class="cont" id="cont3">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td width="98%" align="left" valign="top">Monuments</td>
+					<td width="2%" align="left" valign="top"><a href="javascript:void(0);" onclick="javascript:closeDiv();" style="color:#FF0000; font-weight:bold; text-decoration:none;">X</a></td>
+				  </tr>
+			  </table>
+			</div>
+
+			<div style="padding:5px;display:none;" class="cont" id="cont4">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				  <tr>
+					<td width="98%" align="left" valign="top">Overlays</td>
+					<td width="2%" align="left" valign="top"><a href="javascript:void(0);" onclick="javascript:closeDiv();" style="color:#FF0000; font-weight:bold; text-decoration:none;">X</a></td>
+				  </tr>
+			  </table>
+			</div>
+	   </div>
+</div>
+
+ <div style="width:980px; margin:20px auto; height:auto;background:#EAEAEA; padding:0 15px;" class="cornerDiv">
+	<div>
+       <span style="margin-left:800px;" class="labelname"></span>
+    </div>
+
+    <div style="margin:25px 0 0;">
+
+     <div style="margin-bottom:5px; padding-top:10px;">
+     <span class="labelname">Sort By</span>
+     <select id="SortData" class="boxformwh" name="sortby"  onchange="SortDataBy();" >
+	   <option value="NorthSouth" >North to South</option>
+	   <option value="SouthNorth" >South to North</option>
+	   <option value="DateTaken">Date Taken</option>
+	   <option value="Name">Name</option>
+	  </select>
+    </div>
+
+     <div>
+       <div id="mapDiv" style="float:left;width:590px;">
+
+        <div id="map"></div>
+		<div id="crosshair" style="display:none;"></div>
+        <div id="photo"></div>
+     </div>
+       <div id="divList" style="float:right;height:800px; width:370px; overflow-x:hidden; overflow-y:scroll;">
+         <ul id="list" ></ul>
+	   </div>
+       <div style="clear:both;"></div>
+     </div>
+
+     <div id="mapinfo"></div>
+
+    </div>
+</div>
+
+<div style="clear:both;"></div>
+
+<input type="hidden" id="hidden_radius" name="hidden_radius" value="0" />
+<input type="text" id="cleared_circle" name="cleared_circle" value="1" />
+<input type="text" id="cleared_rect" name="cleared_rect" value="1" />
+
+</body>
+</html>

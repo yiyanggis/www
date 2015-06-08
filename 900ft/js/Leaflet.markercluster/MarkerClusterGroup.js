@@ -383,6 +383,16 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 		return result;
 	},
 
+	//yy
+	getPlace:function(){
+		return this.coord;
+	},
+
+	setPlace:function(){
+		var pt=this.getLayer(0);
+		this.coord=pt.getLatLng();
+	},
+
 	//Returns true if the given layer is in this MarkerClusterGroup
 	hasLayer: function (layer) {
 		if (!layer) {
@@ -629,6 +639,11 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 	_defaultIconCreateFunction: function (cluster) {
 		var childCount = cluster.getChildCount();
 
+		//var pt=this.getLayer(0);
+		this.coord=cluster.getLatLng();
+
+		var placename=this.coord.lat.toPrecision(6)+","+this.coord.lng.toPrecision(6);
+
 		var c = ' marker-cluster-';
 		if (childCount < 10) {
 			c += 'small';
@@ -641,11 +656,11 @@ L.MarkerClusterGroup = L.FeatureGroup.extend({
 
 		//yy 04282015
 		if(childCount>20){
-			return new L.DivIcon({ html: '<div style="margin-left:'+(childCount-15)+'px;margin-top:'+(childCount-15)+'px"><span>' + childCount + '</span></div>', className: 'marker-cluster' + c +" marker-cluster-"+childCount, radius:childCount, iconSize: new L.Point(childCount*2, childCount*2) });	
+			return new L.DivIcon({ html: '<div class="number" style="margin-left:'+(childCount-15)+'px;margin-top:'+(childCount-15)+'px; "><span>' + childCount + '</span></div><div class="placename" style="margin-left:'+(childCount-50)+'px;margin-top:'+(childCount-15)+'px;z-index:1000;"><h3>'+placename+'</h3></div>', className: 'marker-cluster' + c +" marker-cluster-"+childCount, radius:childCount, iconSize: new L.Point(childCount*2, childCount*2) });	
 
 		}
 		else
-			return new L.DivIcon({ html: '<div><span>' + childCount + '</span></div>', className: 'marker-cluster' + c +" marker-cluster-"+childCount, iconSize: new L.Point(40, 40) });
+			return new L.DivIcon({ html: '<div class="number" style=""><span>' + childCount + '</span></div><div class="placename" style="margin-left:'+(childCount-50)+'px;margin-top:'+(childCount-15)+'px;z-index:1000;"><h3>'+placename+'</h3></div>', className: 'marker-cluster' + c +" marker-cluster-"+childCount, iconSize: new L.Point(40, 40) });
 		
 	},
 
