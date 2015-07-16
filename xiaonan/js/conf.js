@@ -1,6 +1,6 @@
 
 
-Xiaonan.Config=Xiaonan.Class.extend({
+YY.Config=YY.Class({
 
 	version:"0.1",
 

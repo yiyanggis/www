@@ -149,6 +149,7 @@ jQuery(document).ready(function($) {
     }
   });
 
+
   function displayLabels(response){
 
     var areas=JSON.parse(response);
@@ -244,6 +245,7 @@ jQuery(document).ready(function($) {
 
     var latSpan = northEast.lat() - southWest.lat();
     var lngSpan = northEast.lng() - southWest.lng();
+    
     //yy
     //courseLibrary2
     data = $.parseJSON(courseLibrary2);

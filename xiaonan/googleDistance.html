@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data Layer: Styling</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+
+    <link href="../css/d3.slider.css" rel="stylesheet">
+    <style>
+      html, body, #map-canvas {
+        height: 90%;
+        margin: 0px;
+        padding: 0px
+      }
+
+      .labels h1{
+        font:12px;
+        color: blue;
+       -webkit-text-fill-color: blue; /* Will override color (regardless of order) */
+       -webkit-text-stroke-width: 1px;
+       -webkit-text-stroke-color: white;
+
+       text-shadow:
+        1px 1px 0 #000,
+        /* Simulated effect for Firefox and Opera
+           and nice enhancement for WebKit */
+       -1px -1px 0 #000,  
+        1px -1px 0 #000,
+       -1px  1px 0 #000,
+        1px  1px 0 #000;
+      }
+
+      h2{
+        font:12px;
+        font-stretch: expanded;
+        font-weight: 1000;
+        color: blue;
+        text-align: center;
+
+      }
+    </style>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+    <script src="../js/d3.min.js"></script>
+    <script src="../js/d3.slider.js"></script>
+
+    
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+    <script src="js/YY.js"></script>
+    <script src="js/Google.js"></script>
+    <script src="js/Geometry.js"></script>
+
+    <script>
+var map;
+
+var areaMarkers;
+var areas;
+
+var currentArea;
+
+var btnStatus;
+
+var ptStart,ptEnd;
+var disLine;
+
+var circle,cityCircle;
+
+var menuBtns;
+
+var image = {
+    url: 'image/test.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(960, 480),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(48, 24),
+    scaledSize: new google.maps.Size(96, 48)
+  };
+
+  var shape = {
+      coords: [0,0,96,0,96,48,0,48,0,0],
+      type: 'poly'
+  };
+
+  var lineSymbol = {
+    path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+  };
+
+  var testData=[{
+    "name":"1",
+    "date":"01/01/2011",
+    "coord":{
+      "x":10,
+      "y":10
+    }
+  }
+  ,{
+      "name":"2",
+    "date":"01/01/2012",
+    "coord":{
+      "x":20,
+      "y":20
+    }
+  }
+  ,{
+      "name":"3",
+    "date":"01/01/2013",
+    "coord":{
+      "x":30,
+      "y":30
+    }
+  }
+  ];
+
+  var testMarkers,testmarker;
+  var testPolyline;
+
+
+  $(document).ready(function(){
+
+    //testMarker=new 
+    testMarkers=[];
+    testPolyline=new YY.Geometry.Polyline({style:"arrow"});
+
+
+
+    
+
+
+    map = new google.maps.Map(document.getElementById('map-canvas'), {
+      zoom: 4,
+      //minZoom:12,
+      center: {lat: 34.03, lng: -118.5},
+      mapTypeID:google.maps.MapTypeId.TERRAIN 
+    });
+
+    var markerStart,markerEnd;
+
+    map.setTilt(0);
+
+    testPolyline.createPolyline(map);
+
+    //slider
+    //d3.select('#slider1').call(d3.slider());
+    d3.select('#slider1').call(
+      d3.slider().scale(
+        d3.time.scale().domain([new Date(1989,1,1), new Date(2016,1,1)])).axis(d3.svg.axis()
+        )
+        .on("slide", function(evt, value) {
+          console.log(value);
+
+          //
+          var year=new Date(value).getFullYear();
+          //remove marker in testmarkers
+          if(testMarkers.length>0){
+            //$.each(testMarkers,function(index,value){
+            //  if(testMarkers.)
+            //});
+          }
+
+          //add new marker to testmarkers & testPolyline
+          $.each(testData,function(index,value2){
+            var tempYear=new Date(value2.date).getFullYear();
+            var tempPt=new google.maps.LatLng(value2.coord.y,value2.coord.x);
+              //if(tempYear<=year&&tempYear>(year-1)){
+              if(tempYear<=year){
+                //if(testMarker==null){
+                  testMarker=new google.maps.Marker({
+                    position: tempPt,
+                    map: map,
+                    title: 'location',
+                    draggable:true
+                    });
+
+                  testMarkers.push(testMarker);
+                  testPolyline.addPoint(tempPt);
+                  //testPolyline.printProperty("nodes");
+
+                //}
+                //testMarker.setPosition(new google.maps.LatLng(value2.coord.y,value2.coord.x));
+              }
+          });
+        })
+    );
+
+
+
+    google.maps.event.addListener(map, 'click', function(event) {
+      if(btnStatus=="start"){
+        if(markerStart!=null){
+          markerStart.setMap(null);
+          markerStart=null;
+        }
+
+        markerStart = new google.maps.Marker({
+          position: event.latLng,
+          map: map,
+          title: 'location',
+          draggable:true,
+          //icon: image,
+          shape:shape
+          });
+
+        google.maps.event.addListener(markerStart,'drag',function(event){
+          console.log(event.latLng);
+          if(disLine!=undefined){
+            disLine.updatePoint(0,event.latLng);
+          }
+        });
+
+        //var radPt=YY.RadPt(event.latLng);
+        //radPt.print();
+
+        //ptStart=new YY.RadPt(event.latLng.lng(),event.latLng.lat());
+        ptStart=event.latLng;
+        //console.log(ptStart.toString());
+      }
+      else if(btnStatus=="end"){
+        if(markerStart==null){
+          alert("please select start point first");
+          return;
+        }
+        if(markerEnd!=null){
+          markerEnd.setMap(null);
+          markerEnd=null;
+        }
+
+        markerEnd = new google.maps.Marker({
+          position: event.latLng,
+          map: map,
+          title: 'location',
+          draggable:true,
+          //icon: image,
+          shape:shape
+          });
+
+        google.maps.event.addListener(markerEnd,'drag',function(event){
+          console.log(event.latLng);
+          if(disLine!=undefined){
+            disLine.updatePoint(1,event.latLng);
+          }
+        });
+
+        //var radPt=YY.RadPt(event.latLng);
+        //radPt.print();
+
+        //ptEnd=new YY.Point(event.latLng.lng(),event.latLng.lat());
+        ptEnd=event.latLng;
+        //console.log(ptEnd.toString());
+
+        var dis=YY.Google.Distance.getDistance(ptStart,ptEnd);
+        alert(dis*0.000621371192);
+
+        //draw line between point
+        if(disLine!=undefined){
+          disLine.path.setMap(null);
+          disLine=null;
+        }
+
+        disLine=new YY.Geometry.Polyline({nodes:[ptStart,ptEnd],
+          style:"arrow"
+        });
+        disLine.printProperty("nodes");
+
+        disLine.createPolyline(map);
+        
+      }
+      else if(btnStatus=="circle"){
+        if(markerStart!=null){
+          markerStart.setMap(null);
+          markerStart=null;
+        }
+
+        markerStart = new google.maps.Marker({
+          position: event.latLng,
+          map: map,
+          title: 'location'
+          });
+
+        //var radPt=YY.RadPt(event.latLng);
+        //radPt.print();
+
+        //ptEnd=new YY.Point(event.latLng.lng(),event.latLng.lat());
+        circle=new YY.Circle(event.latLng.lng(),event.latLng.lat(),10000,map);
+        //console.log(ptEnd.toString());
+
+        cityCircle = new google.maps.Circle(circle.generateOptions());
+
+        var populationOptions = {
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35,
+          map: map,
+          center: event.latLng,
+          radius: 100000
+        };
+        // Add the circle for this city to the map.
+        //cityCircle = new google.maps.Circle(populationOptions);
+      }
+      
+
+    });
+
+    menuBtns=$(".menuBtn");
+    console.log(menuBtns);
+
+    menuBtns.each(function(index,value){
+      console.log(index+$(value).attr('value'));
+    });
+
+    menuBtns.click(function(e){
+      var name=$(e.target).attr('value');
+      btnStatus=name;
+      menuBtns.parent().removeClass("active");
+      $(this).parent().addClass("active");
+
+    });
+
+    $("#addPt").click(function(){
+
+      
+    });
+
+    /*
+    $("#startBtn").click(function(){
+
+      if(btnStatus!="start"){
+        markerStart=null;
+        btnStatus="start";
+        $(this).parent().addClass("active");
+      }
+      else{
+        btnStatus=null;
+        $(this).parent().removeClass("active");
+      }
+    });
+
+    $("#endBtn").click(function(){
+
+      if(btnStatus!="end"){
+        marketEnd=null;
+        btnStatus="end";
+        $(this).parent().addClass("active");
+      }
+      else{
+        btnStatus=null;
+        $(this).parent().removeClass("active");
+      }
+    });
+
+    $("#circleBtn").click(function(){
+      if(btnStatus!="circle"){
+        markerStart=null;
+        btnStatus="circle";
+        $(this).parent().addClass("active");
+      }
+      else{
+        btnStatus=null;
+        $(this).parent().removeClass("active");
+      }
+    });*/
+
+    //var googleDistance
+  });
+
+    </script>
+  </head>
+  <body>
+    
+    <div>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Brand</a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+              <li><a href="#">Link <span class="sr-only">(current)</span></a></li>
+              <li><a class="menuBtn" value="circle" id="circleBtn" href="#">Circle</a></li>
+              <li><a class="menuBtn" value="start" id="startBtn" href="#">Start</a></li>
+              <li><a class="menuBtn" value="end" id="endBtn" href="#">End</a></li>
+              <li><a class="menuBtn" value="end" id="addPt" href="#">addPt</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a class="menuBtn" value="action" href="#">Action</a></li>
+                  <li><a class="menuBtn" value="action2" href="#">Another action</a></li>
+                  <li><a class="menuBtn" value="" href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a class="menuBtn" href="#">Separated link</a></li>
+                  <li class="divider"></li>
+                  <li><a class="menuBtn" href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <!--<form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input type="text" class="form-control" placeholder="Search">
+              </div>
+              <button type="submit" class="btn btn-default">Submit</button>
+            </form>-->
+            <!--<ul class="nav navbar-nav navbar-right">
+              <li><a href="#">Link</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#">Separated link</a></li>
+                </ul>
+              </li>
+            </ul>-->
+          </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+      </nav>
+    </div>
+    <div id="map-canvas">
+      
+    </div>
+    <div style="height:10%;bottom: 10px;z-index:1000;margin:15px;">
+      <div id="slider1" ></div>
+      <div>
+        <span id="distance"></span>
+      <div>
+    </div>
+  </body>
+</html>

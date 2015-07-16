@@ -1,0 +1,141 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Florin <florin@drumliber.ro>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+
+#. Text in function
+#: custom-more-link-complete.php:1
+msgid "Cheatin’ uh?"
+msgstr "Trişezi, ha?"
+
+#. Text in echo
+#: custom-more-link-complete.php:279
+msgid "Save Changes"
+msgstr "Salvează schimbările"
+
+#. Text in echo
+#: custom-more-link-complete.php:271
+msgid " characters/words."
+msgstr " caractere/cuvinte."
+
+#. Text in echo
+#: custom-more-link-complete.php:267
+msgid "(aplicable only if <code>%title%</code> is in pattern)"
+msgstr "(se aplică doar dacă <code>%title%</code> este în patern)"
+
+#. Text in echo
+#: custom-more-link-complete.php:240
+msgid "By default WordPress will use \"Continue Reading&#8230;\". You can remove <code>%linktext%</code> and use your own text."
+msgstr "În mod standard WordPress va folosi \"Continue Reading&#8230;\". Poţi să ştergi codul <code>%linktext%</code> şi să pui textul tău propriu."
+
+#. Text in echo
+#: custom-more-link-complete.php:219
+msgid "Custom More Link Complete"
+msgstr "Custom More Link Complete"
+
+#. Text in function
+#: custom-more-link-complete.php:256
+msgid "Custom more link settings updated."
+msgstr "Setările link-ului customizat au fost salvate."
+
+#. Text in echo
+#: custom-more-link-complete.php:220
+msgid "Customize the WordPress \"Read more\" link displayed on bottom of your posts. With this plugin you can add custom attributes such as the \"<code>nofollow</code>\" relation, add custom XHTML tags surrounding the link or remove the <code>#-number</code> anchor added by WordPress. By default it puts the article title in the link. If you like this plugin please consider giving a backlink to <a href=\"http://www.drumliber.ro/\" title=\"Link to the authors website\">http://www.drumliber.ro/</a> or <b><a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WCAGK4N8G8RBC&lc=GB&item_name=Help%20me%20by%20supporting%20the%20Custom%20More%20Link%20Complete%20WordPress%20Plugin&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHosted\">donate</a></b> in order to help me continue supporting the plugin and creating new plugins or versions of this one. Thank you."
+msgstr "Customizează linkul WordPress \"Read more\" afişat sub începutul de articol. Cu acest plugin poţi adăuga atribute cum ar fi \"<code>nofollow</code>\", poţi adăuga cuvinte cheie XHTML în jurul linkului sau elimina ancora<code>#-number</code> adăugată de WordPress. În mod standard pluginul e setat să adauge titlul articolului în link. Dacă îţi place pluginul, poţi lăsa un link spre <a href=\"http://www.drumliber.ro/\" title=\"link spre site-ul autorului pluginului\">http://www.drumliber.ro/</a> sau <b><a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WCAGK4N8G8RBC&lc=GB&item_name=Help%20me%20by%20supporting%20the%20Custom%20More%20Link%20Complete%20WordPress%20Plugin&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHosted\">să donezi</a></b> pentru a mă ajuta să ofer în continuare suport pentru plugin, să ofer versiuni îmbunătăţite ale acestuia sau să creez noi pluginuri. Îţi mulţumesc."
+
+#. Text in echo
+#: custom-more-link-complete.php:272
+msgid "Display ellipsis marks (...) at the end of the title, <b>only</b> if it is has been cut off. eg. The answer to life..."
+msgstr "Afişează punctele de suspesie (...) la sfârşitul titlului, <b>doar</b> daca titlul a fost trunchiat. ex.: Raspunsul în viaţă..."
+
+#. Text in echo
+#: custom-more-link-complete.php:353
+msgid "Also use CMLC for excerpts. The plugin will remove default brackets [...] and <b>Continue reading</b> text from <i>excerpts</i> modified by <b>TwentyTen</b> and <b>TwentyEleven</b> themes. It is needed if you run these themes and want to customize read-more links on excerpts, here in CMLC."
+msgstr "Foloseşte CMLC şi pentru excerpt-uri. Pluginul va elimina parantezele cu cele 3 puncte [...] şi link-ul <b>Citeşte mai departe</b> din <i>excerpt</i>-urile modificate în temele <b>TwentyTen</b> şi <b>TwentyEleven</b>. Opţiune necesară dacă vreţi să să aveţi link-uri de genul 'Citeşte mai departe' customizate şi la excerpt-uri, cu ajutorul cu CMLC."
+
+#. Text in echo
+#: custom-more-link-complete.php:268
+msgid "Display the entire title"
+msgstr "Afişează titlul complet"
+
+#. Text in echo
+#: custom-more-link-complete.php:269
+msgid "Limit title by number of characters"
+msgstr "Limitează numărul de caractere din titlu"
+
+#. Text in echo
+#: custom-more-link-complete.php:270
+msgid "Limit title by number of words (max: 99)"
+msgstr "Limitează numărul de cuvinte din titlu (max: 99)"
+
+#. Text in echo
+#: custom-more-link-complete.php:271
+msgid "Limit title to "
+msgstr "Limitează la"
+
+#. Text in echo
+#: custom-more-link-complete.php:267
+msgid "Limits for Title"
+msgstr "Limitări ale titlului"
+
+#. Text in echo
+#: custom-more-link-complete.php:264
+msgid "More Link Pattern"
+msgstr "Paternul linkului editat"
+
+#. Text in echo
+#: custom-more-link-complete.php:273
+msgid "Note: These limits/options only apply to the post title, and not the plaintext you have entered."
+msgstr "Notă: Limitările/opţiunile acestea se aplică doar titlului articolului, nu conţinutului adăgat de tine."
+
+#. Text in echo
+#: custom-more-link-complete.php:238
+msgid "The anchortext provided by WordPress that jumps the complete article to the link point. If you want the page to jump, add <code>%anchor%</code> to the pattern just after <code>%permalink%</code>. (default: disabled)"
+msgstr "Linkul ancoră al WordPress care face ca articolul complet să sară la poziţia link-ului. Dacă vrei ca pagina să sară, adaugă <code>%anchor%</code> la patern, fix dupa <code>%permalink%</code>. (în mod standard: dezactivat)"
+
+#. Text in echo
+#: custom-more-link-complete.php:239
+msgid "The default CSS class provided by WordPress (default: <code>more-link</code>)"
+msgstr "Clasa standard CSS setată de WordPress (în mod standard: <code>more-link</code>)"
+
+#. Text in echo
+#: custom-more-link-complete.php:240
+msgid "The linktext provided by WordPress"
+msgstr "Textul link-ului standard al WordPress"
+
+#. Text in function
+#: custom-more-link-complete.php:247
+msgid "The new more link pattern could not be saved, sorry. "
+msgstr "Paternul nou al link-ului nu a fost salvat. Scuze. "
+
+#. Text in echo
+#: custom-more-link-complete.php:237
+msgid "The permalink provided by WordPress to the full post"
+msgstr "Permalink-ul WordPress către articolul complet"
+
+#. Text in echo
+#: custom-more-link-complete.php:241
+msgid "The title of the article provided by WordPress. You can customize the title with the options in this page."
+msgstr "Titlul articolului primit de la WordPress. Poţi să îl adaptezi cu funcţiile din această pagină."
+
+#. Text in echo
+#: custom-more-link-complete.php:234
+msgid "Usage"
+msgstr "Folosire"
+
+#. Text in echo
+#: custom-more-link-complete.php:235
+msgid "Use the following tags to build your custom more link:"
+msgstr "Foloseşte următoarele cuvinte cheie pentru a customiza linkul de continuare a articolului:"
+
+#. Text in echo
+#: custom-more-link-complete.php:271
+msgid "Default pattern"
+msgstr "Patern-ul standard"
+

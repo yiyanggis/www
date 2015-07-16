@@ -1,0 +1,97 @@
+GTC_ID,ADDRESS,CITY,STATE,ZIP,ZIP4
+1,624 S. Grand Ave,Los Angeles,CA,90731,3124
+2,818 W. 7th St,Los Angeles,CA,90731,3013
+3,1 Wilshire Blvd,Los Angeles,CA,90017,3854
+4,626 Wilshire Blvd,Los Angeles,CA,90017,3209
+5,2050 Martin Ave,Santa Clara,CA,95050,2702
+6,555 Reed St,Santa Clara,CA,95050,3014
+7,2347 Curtis St,Denver,CO,80205,2627
+8,910 15th St,Denver,CO,80202,2912
+9,108 Bank St,Waterbury,CT,6702,2233
+10,5 Riverbend Dr,Stamford,CT,6907,2622
+11,86 Viaduct Rd,Stamford,CT,6907,2735
+12,677 Washington Blvd,Stamford,CT,6901,3707
+13,4800 Spring Park Rd,Jacksonville,FL,32207,7406
+14,421 West Church Street,Jacksonville,FL,32202,4173
+15,2850 Interstate Drive,Lakeland,FL,33805,2378
+16,56 Marietta St,Atlanta,GA,30303,2885
+17,340 Farrington Highway,Kapolei,HI,96707,
+18,350 East Cermak Rd,Chicago,IL,60616,5507
+19,725 South Wells St,Chicago,IL,60607,4521
+20,2200 Busse Rd,Elk Grove Village,IL,60007,
+21,34 Saint Martin Dr,Marlborough,MA ,1752,
+22,1102 Grand Ave,Kansas City,MO,64106,2316
+23,511 11th Ave,Minneapolis,MN,55415,1537
+24,2475 Arden St,Las Vegas,NV,89104,6005
+25,832 Pilot RoaD,Las Vegas,NV,89119,
+26,310 Marlboro Rd,Keene,NH,3431,
+27,16 Cavendish Ct,Lebanon,NH,3766,1441
+28,999 Frontier Road,Bridgewater,NJ,8807,2967
+29,9 Wing Drive,Cedar Knolls,NJ,7927,1006
+30,11 Skyline Dr,Hawthorne,NY,10532,
+31,111 Pavonia,Jersey City,NJ,7310,1755
+32,165 Halsey S,Newark,NJ,7102,2834
+33,5851 West Side Ave,North Bergin,NJ,7047,6445
+34,15 Corporate Pl, Piscataway,NJ,8854,6107
+35,101 Possumtown Rd, Piscataway,NJ,8854,3706
+36,275 Hartz Way, Piscataway,NJ,7094,1908
+37,200 Meadowlands Pkwy,Secaucus,NJ,7094,2314
+38,775 Secaucus Rd,Secaucus,NJ,7094,
+39,300 Blvd East,Weehawken,NJ,7086,6702
+40,41 State St,Albany,NY,12207,2843
+41,480 N. Bedford Plaza,Chappaqua,NY,10514,1715
+42,882 3rd Ave,Brooklyn,NY,11232,1904
+43,470 Vanderbilt Ave,Brooklyn,NY,11238,2208
+44,501 Franklin Ave,Garden City,NY,11530,5807
+45,11 Skyline Dr,Hawthorn,NY,10532,2145
+46,32 6th Ave,New York,NY,10013,2473
+47,111 8th Ave,New York,NY,10011,5201
+48,85 10th Ave,New York,NY,10011,4725
+49,601 W. 26th St,New York,NY,10001,1101
+50,1095 Ave of the Americas,New York,NY,10036,6797
+51,75 Broadstreet,New York,NY,10004,2415
+52,25 Broadway,New York,NY,10004,1010
+53,65 Broadway,New York,NY,10006,2503
+54,60 Hudson S,New York,NY,10013,3315
+55,252 Hudson St,New York,NY,10013,
+56,325 Hudson St,New York,NY,10013,1045
+57,32 Old Slip,New York,NY,10005,3500
+58,375 Pearl Street,New York,NY,10038,1444
+59,121 Varick St,New York,NY,10013,1408
+60,150 Varick S,New York,NY,10013,1218
+61,32 Whitehall S,New York,NY,10004,
+62,100 William S,New York,NY,10038,4512
+63,1 Ramland Road,Orangeburg,NY,10962,2627
+64,7 Teleport Dr,Staten Island,NY,10311,1001
+65,1025 Old Country Rd,Westbury,NY,11590,5645
+66,200 W. Prospect Ave,Cleveland,OH,44113,1432
+67,555 Scherers Ct,Columbus,OH,43085,5710
+68,921 SW Washington S,Portland,OR,97205,2827
+69,1000 Adams Ave,Audubon,PA,19403,2402
+70,3949 Schelden Cir,Bethlehem,PA,18017,8936
+71,9999 Hamilton Blvd,Breinigsville,PA,18031,9300
+72,1950 N Stemmons Fwy,Dallas,TX ,75207,3134
+73,45 Krupp Drive,Williston,VT,5495,8911
+74,44461 Chillum Place, Ashburn,VA,20147,6034
+75,21715 Filigree Ct, Ashburn,VA,20147,6205
+76,21625 Gresham Drive, Ashburn,VA,20147,6078
+77,44521 Hastings Drive, Ashburn,VA,20147,6038
+78,21635 Red Rum Drive, Ashburn,VA,20147,7501
+79,851 Coho Way,Bellingham,WA,98225,2067
+80,3301 Monte Villa Pkwy,Bothell,WA,98021,8941
+81,4200 194th St SW,Lynnwood,WA,98036,5611
+82,2001 6th Ave,Seattle,WA,98121,2855
+83, 23403 E. Mission Ave , Spokane ,WA,99019,
+84,1211 International Blvd, Tukwila,WA,98168,
+85,1212 New York Ave,Washington ,DC,20006,
+86,340 Progress Circle, Cheyenne,WY ,82007,
+87,1250 Rene Levesque Blvd,Montreal,QC,,
+88,3000 Rene Levesque Blvd,Montreal,QC,,
+89,625 Rene Levesque Blvd,Montreal,QC,,
+90,2341 Alfred Nobel,Saint Laurent,QC,,
+91,2351 Alfred Nobel,Saint Laurent,QC,,
+92,1155 University,Montreal ,QC,,
+93,151 Front Street Wet,Toronto ,ON,,
+94,905 King Street West,Toronto ,ON,,
+95,555 West Hastings Street ,Vancouver,BC,,
+96,1050 West Pender,Vancouver,BC,,

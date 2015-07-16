@@ -1,0 +1,141 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Florin <florin@drumliber.ro>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+
+#. Text in function
+#: custom-more-link-complete.php:1
+msgid "Cheatin’ uh?"
+msgstr "Schummelst du?"
+
+#. Text in echo
+#: custom-more-link-complete.php:279
+msgid "Save Changes"
+msgstr "Änderungen speichern"
+
+#. Text in echo
+#: custom-more-link-complete.php:271
+msgid " characters/words."
+msgstr "Zeichen/Wörter."
+
+#. Text in echo
+#: custom-more-link-complete.php:267
+msgid "(aplicable only if <code>%title%</code> is in pattern)"
+msgstr "(anwendbar nur wenn <code>%title%</code> im Pattern ist)"
+
+#. Text in echo
+#: custom-more-link-complete.php:240
+msgid "By default WordPress will use \"Continue Reading&#8230;\". You can remove <code>%linktext%</code> and use your own text."
+msgstr "Standardmäßig  wird WordPress \"Continue Reading&#8230;\" benutzen. Du kannst <code>%linktext%</code> löschen und deinen eigenen Text einfügen."
+
+#. Text in echo
+#: custom-more-link-complete.php:219
+msgid "Custom More Link Complete"
+msgstr "Custom More Link vollständig"
+
+#. Text in function
+#: custom-more-link-complete.php:256
+msgid "Custom more link pattern updated."
+msgstr "Custom more link Einstellungen wurde gespeichert."
+
+#. Text in echo
+#: custom-more-link-complete.php:220
+msgid "Customize the WordPress \"Read more\" link displayed on bottom of your posts. With this plugin you can add custom attributes such as the \"<code>nofollow</code>\" relation, add custom XHTML tags surrounding the link or remove the <code>#-number</code> anchor added by WordPress. By default it puts the article title in the link. If you like this plugin please consider giving a backlink to <a href=\"http://www.drumliber.ro/\" title=\"Link to the authors website\">http://www.drumliber.ro/</a> or <b><a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WCAGK4N8G8RBC&lc=GB&item_name=Help%20me%20by%20supporting%20the%20Custom%20More%20Link%20Complete%20WordPress%20Plugin&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHosted\">donate</a></b> in order to help me continue supporting the plugin and creating new plugins or versions of this one. Thank you."
+msgstr "Passe den WordPress \"Read more\" Link, der unter dem Post angezeigt wird, an. Mit diesem Plugin kannst du Attribute wie \"<code>nofollow</code>\" hinzufügen, mit eigene XHTML tags den Link umgeben oder den Ancher <code>#-number</code>, der von WordPress hinzugefügt wird, entfernen. Standardmäßig wird der Titel des Artikels im Link hinzugefügt. Falls dir das Plugin gefällt, denke einen Link an <a href=\"http://www.drumliber.ro/\" title=\"link spre site-ul autorului pluginului\">http://www.drumliber.ro/</a> anzugeben oder <b><a href=\"https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=WCAGK4N8G8RBC&lc=GB&item_name=Help%20me%20by%20supporting%20the%20Custom%20More%20Link%20Complete%20WordPress%20Plugin&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG_global%2egif%3aNonHosted\">spende</a></b> um mir zu helfen, weiterhin dieses Plugin durch neue Versionen zu unterstützen und neue Plugins zu entwickeln. Ich bedanke mich."
+
+#. Text in echo
+#: custom-more-link-complete.php:272
+msgid "Display ellipsis marks (...) at the end of the title, <b>only</b> if it is has been cut off. eg. The answer to life..."
+msgstr "Auslassungspunkte (...) am Ende des Titels anzeigen, <b>nur</b> wenn der Titel  abgeschnitten wurde. zB.: Die Antwort auf's Leben..."
+
+#. Text in echo
+#: custom-more-link-complete.php:353
+msgid "Remove default brackets [...] and <b>Continue reading</b> text from <i>excerpts</i> modified by <b>TwentyTen</b> and <b>TwentyEleven</b> themes. It is needed if you run these themes and want to customize read-more links on excerpts, here in CMLC."
+msgstr "Benutze CMLC auch für Auszüge. Das Plugin wird die Klammern [...]  und den Text <b>Weiter lesen</b> aus den <i>Auszügen</i>, die von den Themen <b>TwentyTen</b> und <b>TwentyEleven</b> geändert wurden, entfernen. Es ist in CMLC benötigt, wenn du diese Themen hast und die Links der Form 'Weiter lesen' anpassen willst."
+
+#. Text in echo
+#: custom-more-link-complete.php:268
+msgid "Display the entire title"
+msgstr "Den ganzen Titel anzeigen"
+
+#. Text in echo
+#: custom-more-link-complete.php:269
+msgid "Limit title by number of characters"
+msgstr "Titel durch Zeichenanzahl begrenzen"
+
+#. Text in echo
+#: custom-more-link-complete.php:270
+msgid "Limit title by number of words (max: 99)"
+msgstr "Titel durch Wörteranzahl begrenzen (max: 99)"
+
+#. Text in echo
+#: custom-more-link-complete.php:271
+msgid "Limit title to "
+msgstr "Begrenze den Titel zu"
+
+#. Text in echo
+#: custom-more-link-complete.php:267
+msgid "Limits for Title"
+msgstr "Einschränkungen für den Titel"
+
+#. Text in echo
+#: custom-more-link-complete.php:264
+msgid "More Link Pattern"
+msgstr "Pattern des bearbeiteten Links"
+
+#. Text in echo
+#: custom-more-link-complete.php:273
+msgid "Note: These limits/options only apply to the post title, and not the plaintext you have entered."
+msgstr "Anmerkung: Diese Einschränkungen/Optionen sind gültig nur für den Titel des Artikels und nicht für den ganzen Text den du eingegeben hast."
+
+#. Text in echo
+#: custom-more-link-complete.php:238
+msgid "The anchortext provided by WordPress that jumps the complete article to the link point. If you want the page to jump, add <code>%anchor%</code> to the pattern just after <code>%permalink%</code>. (default: disabled)"
+msgstr "Das Anchortext welches den ganzen Artikel zum Link führt. Wenn du die ganze Seite zum Link führen willst, füge <code>%anchor%</code> zum Pattern genau nach <code>%permalink%</code> hinzu. (standard: deaktiviert)"
+
+#. Text in echo
+#: custom-more-link-complete.php:239
+msgid "The default CSS class provided by WordPress (default: <code>more-link</code>)"
+msgstr "Die Standard CSS Klasse zur Verfügung gestellt von WordPress (standard: <code>more-link</code>)"
+
+#. Text in echo
+#: custom-more-link-complete.php:240
+msgid "The linktext provided by WordPress"
+msgstr "Standard Linktext angegeben von WordPress"
+
+#. Text in function
+#: custom-more-link-complete.php:247
+msgid "The new more link pattern could not be saved, sorry. "
+msgstr "Das Pattern des neuen Links konnte nicht gespeichert werden. Entschuldige."
+
+#. Text in echo
+#: custom-more-link-complete.php:237
+msgid "The permalink provided by WordPress to the full post"
+msgstr "Das Permalink von WordPress zum kompletten Artikel"
+
+#. Text in echo
+#: custom-more-link-complete.php:241
+msgid "The title of the article provided by WordPress. You can customize the title with the options in this page."
+msgstr "Der Titel des Artikels wie von WordPress angegeben. Du kannst diesen mit Optionen in dieser Seite anpassen."
+
+#. Text in echo
+#: custom-more-link-complete.php:234
+msgid "Usage"
+msgstr "Verwendung"
+
+#. Text in echo
+#: custom-more-link-complete.php:235
+msgid "Use the following tags to build your custom more link:"
+msgstr "Benutze folgenden Tag um deinen eigenen \"weiter lesen\" Link zu bauen"
+
+#. Text in echo
+#: custom-more-link-complete.php:271
+msgid "Default pattern"
+msgstr "Standard Pattern"
+

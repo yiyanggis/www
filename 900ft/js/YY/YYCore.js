@@ -232,7 +232,7 @@ YY.GooglePlaceFinder.getPlaceID=function(latlng,radius,callback){
 		this.service.nearbySearch(request, callback);
 	}
 
-}
+};
 
 YY.GooglePlaceFinder.getDetails=function(id,callback){
 	var request = {
@@ -244,9 +244,9 @@ YY.GooglePlaceFinder.getDetails=function(id,callback){
 		this.service.getDetails(request, callback);
 	}
 
-}
+};
 
 YY.GooglePlaceFinder.callback=function(results,status){
 	console.log(results);
 	this.results=results;
-}
+};

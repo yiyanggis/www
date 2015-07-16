@@ -1,0 +1,43 @@
+
+	Error number: 8192
+	Error type: Unknown Error type 8192
+	Error Msg: mysql_real_escape_string(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
+	File name: F:\wamp\www\wpgeotel\wp-content\plugins\permalink-finder\includes\pf-404.php
+	Line Number: 621
+	---------------------
+	
+	Error number: 8192
+	Error type: Unknown Error type 8192
+	Error Msg: mysql_real_escape_string(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
+	File name: F:\wamp\www\wpgeotel\wp-content\plugins\permalink-finder\includes\pf-404.php
+	Line Number: 621
+	---------------------
+	
+	Error number: 8192
+	Error type: Unknown Error type 8192
+	Error Msg: mysql_real_escape_string(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
+	File name: F:\wamp\www\wpgeotel\wp-content\plugins\permalink-finder\includes\pf-404.php
+	Line Number: 621
+	---------------------
+	
+	Error number: 8192
+	Error type: Unknown Error type 8192
+	Error Msg: mysql_real_escape_string(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
+	File name: F:\wamp\www\wpgeotel\wp-content\plugins\permalink-finder\includes\pf-404.php
+	Line Number: 621
+	---------------------
+	
+	Error number: 8192
+	Error type: Unknown Error type 8192
+	Error Msg: mysql_real_escape_string(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
+	File name: F:\wamp\www\wpgeotel\wp-content\plugins\permalink-finder\includes\pf-404.php
+	Line Number: 621
+	---------------------
+	
+	Error number: 8192
+	Error type: Unknown Error type 8192
+	Error Msg: mysql_real_escape_string(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead
+	File name: F:\wamp\www\wpgeotel\wp-content\plugins\permalink-finder\includes\pf-404.php
+	Line Number: 621
+	---------------------
+	

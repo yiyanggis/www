@@ -1,0 +1,50 @@
+#featured article .post-title > a {
+    border: 2px solid #fff;
+}
+
+#featured article .post-title h2 {
+	padding: 10px;
+	margin-left: -10px;
+}
+
+#featured article .post-title h2[data-has-caption="1"] {
+	background-color: #000;
+}
+
+#featured {
+	margin-top: -130px!important;
+}
+
+div.orbit-wrapper {
+	z-index: -100;
+	position: relative!important;
+}
+
+.single-portfolio #sidebar {
+	position: relative!important;
+	margin-left: 0px!important;
+	top: 0px!Important;
+	bottom: 0px!important;
+}
+
+body, #header-outer {
+	padding-right: 0px!Important;
+}
+
+ body[data-smooth-scrolling="1"] .orbit-wrapper div.slider-nav span.right {
+  right: 0px!important; 
+}
+
+
+#header-outer header#top nav {
+	display: block!important;
+}
+
+.full-width-section.parallax_section {
+	background-position: center center!important;
+	background-attachment: scroll!important;
+}
+
+.full-width-section  {
+
+}
